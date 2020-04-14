@@ -10,6 +10,8 @@ from bench import (
 import numpy as np
 import xgboost as xgb
 import os
+import sys
+from timeit import default_timer as timer
 
 
 def convert_probs_to_classes(y_prob):
@@ -122,22 +124,52 @@ else:
     if params.n_classes > 2:
         xgb_params['num_class'] = params.n_classes
 
+train_dmatrix_times = []
+train_comp_times = []
+pred_dmatrix_times = []
+pred_comp_times = []
+
+tg0 = timer()
 dtrain = xgb.DMatrix(X_train, y_train)
+tg1 = timer()
 dtest = xgb.DMatrix(X_test, y_test)
+tg2 = timer()
+train_dmatrix_times.append(tg1 - tg0)
+pred_dmatrix_times.append(tg2 - tg1)
 if params.count_dmatrix:
     def fit():
+        t0 = timer()
         dtrain = xgb.DMatrix(X_train, y_train)
-        return xgb.train(xgb_params, dtrain, params.n_estimators)
+        t1 = timer()
+        res = xgb.train(xgb_params, dtrain, params.n_estimators)
+        t2 = timer()
+        train_dmatrix_times.append(t1 - t0)
+        train_comp_times.append(t2 - t1)
+        return res
 
     def predict():
+        t0 = timer()
         dtest = xgb.DMatrix(X_test, y_test)
-        return booster.predict(dtest)
+        t1 = timer()
+        res = booster.predict(dtest)
+        t2 = timer()
+        pred_dmatrix_times.append(t1 - t0)
+        pred_comp_times.append(t2 - t1)
+        return res
 else:
     def fit():
-        return xgb.train(xgb_params, dtrain, params.n_estimators)
+        t0 = timer()
+        res = xgb.train(xgb_params, dtrain, params.n_estimators)
+        t1 = timer()
+        train_comp_times.append(t1 - t0)
+        return res
 
     def predict():
-        return booster.predict(dtest)
+        t0 = timer()
+        res = booster.predict(dtest)
+        t1 = timer()
+        pred_comp_times.append(t1 - t0)
+        return res
 
 fit_time, booster = measure_function_time(fit, params=params)
 y_pred = convert_xgb_predictions(booster.predict(dtrain), params.objective)
@@ -153,3 +185,17 @@ print_output(library='xgboost', algorithm=f'gradient_boosted_trees_{task}',
              times=[fit_time, predict_time], accuracy_type=metric_name,
              accuracies=[train_metric, test_metric], data=[X_train, X_test],
              alg_instance=booster)
+
+stderr_print = lambda x: print(x, file=sys.stderr)
+stderr_print(params.dataset_name)
+stderr_print('train_dmatrix_times')
+stderr_print(train_dmatrix_times)
+
+stderr_print('train_comp_times')
+stderr_print(train_comp_times)
+
+stderr_print('pred_dmatrix_times')
+stderr_print(pred_dmatrix_times)
+
+stderr_print('pred_comp_times')
+stderr_print(pred_comp_times)
