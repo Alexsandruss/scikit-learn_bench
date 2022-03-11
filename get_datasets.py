@@ -21,6 +21,8 @@ for dataset in args.datasets:
             x = np.load(f'{datasets_dir}/{dataset}_x_{subset}.npy', allow_pickle=True)
             y = np.load(f'{datasets_dir}/{dataset}_y_{subset}.npy', allow_pickle=True)
             data = pd.DataFrame(x, columns=[f'f{i}' for i in range(x.shape[1])])
+            if 'int' not in str(y.dtype) and len(np.unique(y)) < 32:
+                y = y.astype('int')
             data['target'] = y
             data.to_csv(f'{datasets_dir}/{dataset}_{subset}.csv', index=False)
         except:
