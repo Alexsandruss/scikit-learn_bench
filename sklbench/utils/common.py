@@ -114,7 +114,8 @@ def flatten_list(input_list: List, ensure_type_homogeneity: bool = False) -> Lis
 
 
 def get_module_members(
-    module_names_chain: Union[List, str]
+    module_names_chain: Union[List, str],
+    distributed: bool = False
 ) -> Tuple[ModuleContentMap, ModuleContentMap]:
     def get_module_name(module_names_chain: List[str]) -> str:
         name = module_names_chain[0]
@@ -151,10 +152,11 @@ def get_module_members(
 
     for name, obj in inspect.getmembers(module):
         if inspect.isclass(obj):
-            if name in classes_map and obj not in classes_map[name]:
-                classes_map[name].append(obj)
-            else:
-                classes_map[name] = [obj]
+            if distributed is False or "spmd" in obj.__module__:
+                if name in classes_map and obj not in classes_map[name]:
+                    classes_map[name].append(obj)
+                else:
+                    classes_map[name] = [obj]
         elif inspect.isfunction(obj):
             if name in functions_map and obj not in functions_map[name]:
                 functions_map[name].append(obj)
@@ -164,7 +166,8 @@ def get_module_members(
     if hasattr(module, "__all__"):
         for name in module.__all__:
             sub_classes_map, sub_functions_map = get_module_members(
-                module_names_chain + [name]
+                module_names_chain + name.split("."),
+                distributed=distributed
             )
             classes_map = merge_maps(classes_map, sub_classes_map)
             functions_map = merge_maps(functions_map, sub_functions_map)

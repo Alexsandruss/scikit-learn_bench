@@ -1,0 +1,39 @@
+{
+    "PARAMETERS_SETS": {
+        "implementations": {
+            "algorithm": [
+                { "library": "onedal", "device": "distributed", "n": 2, "ppn": 2 }
+            ]
+        },
+        "basicstats parameters": {
+            "algorithm": {
+                "estimator": "BasicStatistics",
+                "estimator_methods": { "inference": "compute" }
+            }
+        },
+        "Higgs:2M": {
+            "data": {
+                "dataset": "higgs",
+                "dataset_kwargs": {
+                    "train_file": "higgs_2m_train.csv"
+                }
+            }
+        },
+        "Epsilon:80K": {
+            "data": {
+                "dataset": "epsilon",
+                "dataset_kwargs": {
+                    "train_file": "epsilon_80k_train.csv"
+                }
+            }
+        }
+    },
+    "TEMPLATES": {
+        "Moments Higgs:2M": {
+            "INCLUDE": ["implementations", "basicstats parameters", "Higgs:2M"]
+        },
+        "Moments Epsilon:80K": {
+            "INCLUDE": ["implementations", "basicstats parameters", "Epsilon:80K"]
+        }
+    }
+}

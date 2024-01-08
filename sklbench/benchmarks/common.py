@@ -39,4 +39,16 @@ def main_template(main_method):
     filters = json.loads(args.filters)["filters"]
 
     results = main_method(bench_case, filters)
-    print(json.dumps(results, indent=4))
+    
+    # only print results for rank 0
+    try:
+        from mpi4py import MPI
+        comm = MPI.COMM_WORLD
+        rank = comm.Get_rank()
+        size = comm.Get_size()
+        if rank > 0:
+            return
+    except:
+        print(json.dumps(results, indent=4))
+    else:
+        print(json.dumps(results, indent=4))

@@ -70,6 +70,21 @@ def generate_benchmark_command(
     # benchmark selection
     if get_bench_case_value(bench_case, "algorithm:estimator") is not None:
         benchmark_name = "sklearn_estimator"
+        if get_bench_case_value(bench_case, "algorithm:device") == "distributed":
+            try:
+                from mpi4py import MPI
+                comm = MPI.COMM_WORLD
+                rank = comm.Get_rank()
+                size = comm.Get_size()
+                mpi_n = get_bench_case_value(bench_case, "algorithm:n")
+                if mpi_n is not None:
+                    mpi_ppn = get_bench_case_value(bench_case, "algorithm:ppn") or mpi_n
+                else:
+                    raise ValueError("Specify n for distributed mode")
+                benchmark_name = "distr_sklearn_estimator"
+                command_prefix = f"{command_prefix}mpirun -n {mpi_n} -ppn {mpi_ppn} "
+            except ModuleNotFoundError as e:
+                raise ModuleNotFoundError("mpi4py required for distributed benchmarking.")
     elif get_bench_case_value(bench_case, "algorithm:function") is not None:
         benchmark_name = "custom_function"
     else:
@@ -87,7 +102,7 @@ def run_benchmark_from_case(
     bench_case: BenchCase, filters: List[BenchCase], log_level: str
 ) -> Tuple[int, List[Dict]]:
     command = generate_benchmark_command(bench_case, filters, log_level)
-    logger.debug(f"Benchmark wrapper call command: {command}")
+    logger.warning(f"Benchmark wrapper call command: {command}")
     return_code, stdout, stderr = read_output_from_command(command)
 
     if stdout != "":

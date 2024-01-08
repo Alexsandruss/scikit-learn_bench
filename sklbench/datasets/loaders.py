@@ -360,7 +360,7 @@ def load_epsilon(
     x_train, y_train = load_svmlight_file(local_url_train, dtype=np.float32)
     x_test, y_test = load_svmlight_file(local_url_test, dtype=np.float32)
 
-    x = sparse.vstack([x_train, x_test])
+    x = np.vstack([x_train, x_test])
     y = np.vstack([y_train, y_test])
     y[y <= 0] = 0
 
@@ -766,6 +766,33 @@ def load_road_network(
         }
     }
     return {"x": x, "y": y}, data_desc
+
+
+def load_from_datasetsroot(
+    data_name: str, dataset_params: Dict
+) -> Tuple[Dict, Dict]:
+    datasets_path = os.environ.get("DATASETSROOT")
+    if datasets_path and os.path.exists(datasets_path + "/workloads/" + data_name + "/dataset/" + dataset_params.get("train_file")):
+        train_df = pd.read_csv(datasets_path + "/workloads/" + data_name + "/dataset/" + dataset_params.get("train_file"))
+        x_train = train_df.iloc[:, :-1].to_numpy(dtype=np.float32)
+        y_train = train_df.iloc[:, -1].to_numpy(dtype=np.float32).reshape((-1, 1))
+        
+        if dataset_params.get("test_file"):
+            test_df = pd.read_csv(datasets_path + "/workloads/" + data_name + "/dataset/" + dataset_params.get("test_file"))
+            x_test = test_df.iloc[:, :-1].to_numpy(dtype=np.float32)
+            y_test = test_df.iloc[:, -1].to_numpy(dtype=np.float32).reshape((-1, 1))
+            x = np.vstack([x_train, x_test])
+            y = np.vstack([y_train, y_test])
+            data_desc = {"default_split": { "train_size": y_train.shape[0], "test_size": y_test.shape[0], "shuffle": False}}
+        else:
+            x = np.vstack([x_train])
+            y = np.vstack([y_train])
+            # data_desc = {}
+            return {"x": x}, {}
+        if dataset_params.get("n_classes"):
+            data_desc.update({"n_classes": dataset_params.get("n_classes")})
+
+        return {"x": x, "y": y}, data_desc
 
 
 dataset_loading_functions = {

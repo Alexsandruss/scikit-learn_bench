@@ -1,0 +1,130 @@
+{
+    "PARAMETERS_SETS": {
+        "implementations": {
+            "algorithm": [
+                { "library": "sklearnex", "device": "distributed", "n": 2, "ppn": 2 }
+            ]
+        },
+        "dbscan parameters": {
+            "algorithm": {
+                "estimator": "DBSCAN"
+            }
+        },
+		"mnist_10t": {
+			"data": {
+				"dataset": "mnist",
+				"dataset_kwargs": {
+					"train_file": "mnist_test.csv"
+				}
+			},
+			"algorithm": [
+				{
+					"estimator_params": {
+						"eps": 1.7e3,
+						"min_samples": 3
+					}
+				}
+            ]
+        },
+		"hepmass_10t": {
+			"data": {
+				"dataset": "hepmass",
+				"dataset_kwargs": {
+					"train_file": "hepmass_10t_test.csv"
+				}
+			},
+			"algorithm": [
+				{
+					"estimator_params": {
+						"eps": 5,
+						"min_samples": 3
+					}
+				}
+            ]
+        },
+		"hepmass_50t": {
+			"data": {
+				"dataset": "hepmass",
+				"dataset_kwargs": {
+					"train_file": "hepmass_50t_test.csv"
+				}
+			},
+			"algorithm": [
+				{
+					"estimator_params": {
+						"eps": 5,
+						"min_samples": 20
+					}
+				}
+            ]
+        },
+		"road_network_20t": {
+			"data": {
+				"dataset": "road_network",
+				"dataset_kwargs": {
+					"train_file": "road_network_20t_cluster.csv"
+				}
+			},
+			"algorithm": [
+				{
+					"estimator_params": {
+						"eps": 1e3,
+						"min_samples": 220
+					}
+				}
+            ]
+        },
+		"road_network_100t": {
+			"data": {
+				"dataset": "road_network",
+				"dataset_kwargs": {
+					"train_file": "road_network_100t_cluster.csv"
+				}
+			},
+			"algorithm": [
+				{
+					"estimator_params": {
+						"eps": 1e3,
+						"min_samples": 220
+					}
+				}
+            ]
+        },
+		"cifar_50t": {
+			"data": {
+				"dataset": "cifar",
+				"dataset_kwargs": {
+					"train_file": "cifar_50k_train_multiclass.csv"
+				}
+			},
+			"algorithm": [
+				{
+					"estimator_params": {
+						"eps": 1e3,
+						"min_samples": 220
+					}
+				}
+            ]
+        }               
+	},
+    "TEMPLATES": {
+        "DBSCAN mnist_10t": {
+            "INCLUDE": ["implementations", "dbscan parameters", "mnist_10t"]
+        },
+        "DBSCAN hepmass_10t": {
+            "INCLUDE": ["implementations", "dbscan parameters", "hepmass_10t"]
+        },
+        "DBSCAN hepmass_50t": {
+            "INCLUDE": ["implementations", "dbscan parameters", "hepmass_50t"]
+        },
+        "DBSCAN road_network_20t": {
+            "INCLUDE": ["implementations", "dbscan parameters", "road_network_20t"]
+        },
+        "DBSCAN road_network_100t": {
+            "INCLUDE": ["implementations", "dbscan parameters", "road_network_100t"]
+        },
+        "DBSCAN cifar_50t": {
+            "INCLUDE": ["implementations", "dbscan parameters", "cifar_50t"]
+        }
+    }
+}
