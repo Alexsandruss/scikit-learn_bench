@@ -1,0 +1,49 @@
+{
+    "PARAMETERS_SETS": {
+        "implementations": {
+            "algorithm": [
+                { "library": "onedal", "device": "distributed", "n": 2, "ppn": 2 }
+            ]
+        },
+        "pca parameters": {
+            "algorithm": {
+                "estimator": "PCA",
+                "estimator_methods": { "training": "fit" }
+            }
+        },
+        "Higgs:1M": {
+            "data": {
+                "dataset": "higgs",
+                "dataset_kwargs": {
+                    "train_file": "higgs_1m_train.csv"
+                }
+            },
+            "algorithm": {
+                "estimator_params": {
+                    "n_components": 1
+                }
+            }
+        },
+        "Epsilon:30K": {
+            "data": {
+                "dataset": "epsilon",
+                "dataset_kwargs": {
+                    "train_file": "epsilon_30k_train.csv"
+                }
+            },
+            "algorithm": {
+                "estimator_params": {
+                    "n_components": 1.0
+                }
+            }
+        }
+    },
+    "TEMPLATES": {
+        "KnnBFCls Higgs:1M": {
+            "INCLUDE": ["implementations", "pca parameters", "Higgs:1M"]
+        },
+        "KnnBFCls Epsilon:30K": {
+            "INCLUDE": ["implementations", "pca parameters", "Epsilon:30K"]
+        }
+    }
+}

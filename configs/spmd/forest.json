@@ -1,0 +1,152 @@
+{
+    "PARAMETERS_SETS": {
+        "implementations": {
+            "algorithm": [
+                { "library": "sklearnex", "device": "distributed", "n": 2, "ppn": 2 }
+            ]
+        },
+        "rfcls parameters": {
+            "algorithm": {
+                "estimator": "RandomForestClassifier",
+                "estimator_params": { "criterion": "gini", "max_features": "sqrt" }
+            }
+        },
+        "rfreg parameters": {
+            "algorithm": {
+                "estimator": "RandomForestRegressor",
+                "estimator_params": { "criterion": "squared_error", "max_features": 1.0 }
+            }
+        },
+        "Susy:4.5M;nT:10;D:5": {
+            "data": {
+                "dataset": "susy",
+                "dataset_kwargs": {
+                    "train_file": "susy_train.csv",
+                    "test_file": "susy_test.csv",
+                    "n_classes": 2
+                }
+            },
+            "algorithm": {
+                "estimator_params": {
+                    "n_estimators": 10,
+                    "max_depth": 5
+                }
+            }
+        },
+        "Susy:4.5M;nT:20;D:16": {
+            "data": {
+                "dataset": "susy",
+                "dataset_kwargs": {
+                    "train_file": "susy_train.csv",
+                    "test_file": "susy_test.csv",
+                    "n_classes": 2
+                }
+            },
+            "algorithm": {
+                "estimator_params": {
+                    "n_estimators": 20,
+                    "max_depth": 16
+                }
+            }
+        },
+        "Hepmass:150K;nT:50;D:15": {
+            "data": {
+                "dataset": "hepmass",
+                "dataset_kwargs": {
+                    "train_file": "hepmass_100t_train.csv",
+                    "test_file": "hepmass_50t_test.csv",
+                    "n_classes": 2
+                }
+            },
+            "algorithm": {
+                "estimator_params": {
+                    "n_estimators": 50,
+                    "max_depth": 15
+                }
+            }
+        },
+        "YearMsdTrain:463K;nT:10;D:5": {
+            "data": {
+                "dataset": "year_prediction_msd",
+                "dataset_kwargs": {
+                    "train_file": "year_prediction_msd_train.csv",
+                    "test_file": "year_prediction_msd_test.csv"
+                }
+            },
+            "algorithm": {
+                "estimator_params": {
+                    "n_estimators": 10,
+                    "max_depth": 5
+                }
+            }
+        },
+        "YearMsdTrain:463K;nT:20;D:8": {
+            "data": {
+                "dataset": "year_prediction_msd",
+                "dataset_kwargs": {
+                    "train_file": "year_prediction_msd_train.csv",
+                    "test_file": "year_prediction_msd_test.csv"
+                }
+            },
+            "algorithm": {
+                "estimator_params": {
+                    "n_estimators": 20,
+                    "max_depth": 8
+                }
+            }
+        },
+        "Higgs:1M;nT:15;D:8": {
+            "data": {
+                "dataset": "hepmass",
+                "dataset_kwargs": {
+                    "train_file": "hepmass_100t_train.csv",
+                    "test_file": "hepmass_50t_test.csv"
+                }
+            },
+            "algorithm": {
+                "estimator_params": {
+                    "n_estimators": 15,
+                    "max_depth": 8
+                }
+            }
+        },
+        "Higgs:1M;nT:20;D:8": {
+            "data": {
+                "dataset": "gist",
+                "dataset_kwargs": {
+                    "train_file": "gist_100k.csv",
+                    "test_file": "gist_50k.csv"
+                }
+            },
+            "algorithm": {
+                "estimator_params": {
+                    "n_estimators": 20,
+                    "max_depth": 8
+                }
+            }
+        }
+    },
+    "TEMPLATES": {
+        "ForestCls Susy:4.5M;nT:10;D:5": {
+            "INCLUDE": ["implementations", "rfcls parameters", "Susy:4.5M;nT:10;D:5"]
+        },
+        "ForestCls Susy:4.5M;nT:20;D:16": {
+            "INCLUDE": ["implementations", "rfcls parameters", "Susy:4.5M;nT:20;D:16"]
+        },
+        "ForestCls Hepmass:150K;nT:50;D:15": {
+            "INCLUDE": ["implementations", "rfcls parameters", "Hepmass:150K;nT:50;D:15"]
+        },
+        "ForestReg YearMsdTrain:463K;nT:10;D:5": {
+            "INCLUDE": ["implementations", "rfreg parameters", "YearMsdTrain:463K;nT:10;D:5"]
+        },
+        "ForestReg YearMsdTrain:463K;nT:20;D:8": {
+            "INCLUDE": ["implementations", "rfreg parameters", "YearMsdTrain:463K;nT:20;D:8"]
+        },
+        "ForestReg Higgs:1M;nT:15;D:8": {
+            "INCLUDE": ["implementations", "rfreg parameters", "Higgs:1M;nT:15;D:8"]
+        },
+        "ForestReg Higgs:1M;nT:20;D:8": {
+            "INCLUDE": ["implementations", "rfreg parameters", "Higgs:1M;nT:20;D:8"]
+        }
+    }
+}

@@ -1,0 +1,233 @@
+{
+    "PARAMETERS_SETS": {
+        "implementations": {
+            "algorithm": [
+                { "library": "onedal", "device": "distributed", "n": 2, "ppn": 2 }
+            ]
+        },
+        "knncls parameters": {
+            "algorithm": {
+                "estimator": "KNeighborsClassifier",
+                "estimator_params": {
+                    "algorithm": "brute"
+                }
+            }
+        },
+        "knnreg parameters": {
+            "algorithm": {
+                "estimator": "KNeighborsRegressor",
+                "estimator_params": {
+                    "algorithm": "brute"
+                }
+            }
+        },
+        "Epsilon:100K;K:2": {
+            "data": {
+                "dataset": "epsilon",
+                "dataset_kwargs": {
+                    "train_file": "epsilon_50k_train.csv",
+                    "test_file": "epsilon_50k_train.csv",
+                    "n_classes": 2
+                }
+            },
+            "algorithm": {
+                "estimator_params": {
+                    "n_neighbors": 2
+                }
+            }
+        },
+        "Higgs:150K;K:5": {
+            "data": {
+                "dataset": "higgs",
+                "dataset_kwargs": {
+                    "train_file": "higgs_100t_train.csv",
+                    "test_file": "higgs_50t_test.csv",
+                    "n_classes": 2
+                }
+            },
+            "algorithm": {
+                "estimator_params": {
+                    "n_neighbors": 5
+                }
+            }
+        },
+        "Hepmass:150K;K:5": {
+            "data": {
+                "dataset": "hepmass",
+                "dataset_kwargs": {
+                    "train_file": "hepmass_100t_train.csv",
+                    "test_file": "hepmass_50t_test.csv",
+                    "n_classes": 2
+                }
+            },
+            "algorithm": {
+                "estimator_params": {
+                    "n_neighbors": 5
+                }
+            }
+        },
+        "Epsilon:100K;K:100": {
+            "data": {
+                "dataset": "epsilon",
+                "dataset_kwargs": {
+                    "train_file": "epsilon_50k_train.csv",
+                    "test_file": "epsilon_50k_train.csv",
+                    "n_classes": 2
+                }
+            },
+            "algorithm": {
+                "estimator_params": {
+                    "n_neighbors": 100
+                }
+            }
+        },
+        "Higgs:150K;K:100": {
+            "data": {
+                "dataset": "higgs",
+                "dataset_kwargs": {
+                    "train_file": "higgs_100t_train.csv",
+                    "test_file": "higgs_50t_test.csv",
+                    "n_classes": 2
+                }
+            },
+            "algorithm": {
+                "estimator_params": {
+                    "n_neighbors": 100
+                }
+            }
+        },
+        "Hepmass:150K;K:100": {
+            "data": {
+                "dataset": "hepmass",
+                "dataset_kwargs": {
+                    "train_file": "hepmass_100t_train.csv",
+                    "test_file": "hepmass_50t_test.csv",
+                    "n_classes": 2
+                }
+            },
+            "algorithm": {
+                "estimator_params": {
+                    "n_neighbors": 100
+                }
+            }
+        },
+        "Gist:150K;K:3": {
+            "data": {
+                "dataset": "gist",
+                "dataset_kwargs": {
+                    "train_file": "gist_100k.csv",
+                    "test_file": "gist_50k.csv",
+                    "n_classes": 2
+                }
+            },
+            "algorithm": {
+                "estimator_params": {
+                    "n_neighbors": 3
+                }
+            }
+        },
+        "Gist:300K;K:3": {
+            "data": {
+                "dataset": "gist",
+                "dataset_kwargs": {
+                    "train_file": "gist_200k.csv",
+                    "test_file": "gist_100k.csv",
+                    "n_classes": 2
+                }
+            },
+            "algorithm": {
+                "estimator_params": {
+                    "n_neighbors": 3
+                }
+            }
+        },
+        "Cifar:50K;K:7": {
+            "data": {
+                "dataset": "cifar",
+                "dataset_kwargs": {
+                    "train_file": "cifar_50k_train_binary.csv",
+                    "test_file": "cifar_10k_test_binary.csv",
+                    "n_classes": 2
+                }
+            },
+            "algorithm": {
+                "estimator_params": {
+                    "n_neighbors": 7
+                }
+            }
+        },
+        "Mnist:60K;K:5": {
+            "data": {
+                "dataset": "mnist",
+                "dataset_kwargs": {
+                    "train_file": "mnist_train.csv",
+                    "test_file": "mnist_test.csv",
+                    "n_classes": 10
+                }
+            },
+            "algorithm": {
+                "estimator_params": {
+                    "n_neighbors": 5
+                }
+            }
+        },
+        "YearMsdTrain:463K;K:2": {
+            "data": {
+                "dataset": "year_prediction_msd",
+                "dataset_kwargs": {
+                    "train_file": "year_prediction_msd_train.csv",
+                    "test_file": "year_prediction_msd_test.csv"
+                }
+            },
+            "algorithm": {
+                "estimator_params": {
+                    "n_neighbors": 2
+                }
+            }
+        }
+    },
+    "TEMPLATES": {
+        "KnnBFCls Epsilon:100K;K:2": {
+            "INCLUDE": ["implementations", "knncls parameters", "Epsilon:100K;K:2"]
+        },
+        "KnnBFCls Higgs:150K;K:5": {
+            "INCLUDE": ["implementations", "knncls parameters", "Higgs:150K;K:5"]
+        },
+        "KnnBFCls Hepmass:150K;K:5": {
+            "INCLUDE": ["implementations", "knncls parameters", "Hepmass:150K;K:5"]
+        },
+        "KnnBFCls Epsilon:100K;K:100": {
+            "INCLUDE": ["implementations", "knncls parameters", "Epsilon:100K;K:100"]
+        },
+        "KnnBFCls Higgs:150K;K:100": {
+            "INCLUDE": ["implementations", "knncls parameters", "Higgs:150K;K:100"]
+        },
+        "KnnBFCs Hepmass:150K;K:100": {
+            "INCLUDE": ["implementations", "knncls parameters", "Hepmass:150K;K:100"]
+        },
+        "KnnBFCls Gist:150;K:3": {
+            "INCLUDE": ["implementations", "knncls parameters", "Gist:150K;K:3"]
+        },
+        "KnnBFCls Gist:300K;K:3": {
+            "INCLUDE": ["implementations", "knncls parameters", "Gist:300K;K:3"]
+        },
+        "KnnBFCls Cifar:50K;K:7": {
+            "INCLUDE": ["implementations", "knncls parameters", "Cifar:50K;K:7"]
+        },
+        "KnnBFCls Mnist:60K;K:5": {
+            "INCLUDE": ["implementations", "knncls parameters", "Mnist:60K;K:5"]
+        },
+        "KnnBFReg YearMsdTrain:463K;K:2": {
+            "INCLUDE": ["implementations", "knnreg parameters", "YearMsdTrain:463K;K:2"]
+        },
+        "KnnBFReg Higgs:150K;K:5": {
+            "INCLUDE": ["implementations", "knnreg parameters", "Higgs:150K;K:5"]
+        },
+        "KnnBFReg Gist:150K;K:3": {
+            "INCLUDE": ["implementations", "knnreg parameters", "Gist:150K;K:3"]
+        },
+        "KnnBFReg Mnist:60K;K:5": {
+            "INCLUDE": ["implementations", "knnreg parameters", "Cifar:50K;K:7"]
+        }
+    }
+}

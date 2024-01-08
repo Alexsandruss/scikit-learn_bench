@@ -1,0 +1,154 @@
+{
+    "PARAMETERS_SETS": {
+        "implementations": {
+            "algorithm": [
+                { "library": "onedal", "device": "distributed", "n": 2, "ppn": 2 }
+            ]
+        },
+        "linear parameters": {
+            "algorithm": {
+                "estimator": "LinearRegression"
+            }
+        },
+        "YearMsdTrain:463K": {
+            "data": {
+                "dataset": "year_prediction_msd",
+                "dataset_kwargs": {
+                    "train_file": "year_prediction_msd_train.csv",
+                    "test_file": "year_prediction_msd_test.csv"
+                }
+            }
+        },
+        "Higgs:1M": {
+            "data": {
+                "dataset": "higgs",
+                "dataset_kwargs": {
+                    "train_file": "higgs_1m_train.csv",
+                    "test_file": "higgs_500t_test.csv"
+                }
+            }
+        },
+        "Higgs:10500K": {
+            "data": {
+                "dataset": "higgs",
+                "dataset_kwargs": {
+                    "train_file": "higgs_10500t_train.csv",
+                    "test_file": "higgs_500t_test.csv"
+                }
+            }
+        },
+        "Synth:1Mx28": {
+            "data": {
+                "source": "make_regression",
+                "split_kwargs": {
+                    "train_size": 1000000,
+                    "test_size": 500
+                },
+                "generation_kwargs": {
+                    "n_samples": 1000500,
+                    "n_features": 28,
+                    "noise": 1.25
+                }
+            }
+        },
+        "Synth:2Mx10": {
+            "data": {
+                "source": "make_regression",
+                "split_kwargs": {
+                    "train_size": 2000000,
+                    "test_size": 500
+                },
+                "generation_kwargs": {
+                    "n_samples": 2000500,
+                    "n_features": 10,
+                    "noise": 1.25
+                }
+            }
+        },
+        "Synth:200Kx6": {
+            "data": {
+                "source": "make_regression",
+                "split_kwargs": {
+                    "train_size": 200000,
+                    "test_size": 5000
+                },
+                "generation_kwargs": {
+                    "n_samples": 205000,
+                    "n_features": 6,
+                    "noise": 1.25
+                }
+            }
+        },
+        "Synth:100Kx20": {
+            "data": {
+                "source": "make_regression",
+                "split_kwargs": {
+                    "train_size": 100000,
+                    "test_size": 1000
+                },
+                "generation_kwargs": {
+                    "n_samples": 101000,
+                    "n_features": 20,
+                    "noise": 1.25
+                }
+            }
+        },
+        "Synth:300x4": {
+            "data": {
+                "source": "make_regression",
+                "split_kwargs": {
+                    "train_size": 300,
+                    "test_size": 50000000
+                },
+                "generation_kwargs": {
+                    "n_samples": 50000300,
+                    "n_features": 4,
+                    "noise": 1.25
+                }
+            }
+        },
+        "Synth:500Kx5": {
+            "data": {
+                "source": "make_regression",
+                "split_kwargs": {
+                    "train_size": 500000,
+                    "test_size": 5000
+                },
+                "generation_kwargs": {
+                    "n_samples": 505000,
+                    "n_features": 5,
+                    "noise": 1.25
+                }
+            }
+        }
+    },
+    "TEMPLATES": {
+        "LinReg YearMsdTrain:463K": {
+            "INCLUDE": ["implementations", "linear parameters", "YearMsdTrain:463K"]
+        },
+        "LinReg Higgs:1M": {
+            "INCLUDE": ["implementations", "linear parameters", "Higgs:1M"]
+        },
+        "LinReg Higgs:10500K": {
+            "INCLUDE": ["implementations", "linear parameters", "Higgs:10500K"]
+        },
+        "LinReg Synth:1Mx28": {
+            "INCLUDE": ["implementations", "linear parameters", "Synth:1Mx28"]
+        },
+        "LinReg Synth:Synth:2Mx10": {
+            "INCLUDE": ["implementations", "linear parameters", "Synth:2Mx10"]
+        },
+        "LinReg Synth:200Kx6": {
+            "INCLUDE": ["implementations", "linear parameters", "Synth:200Kx6"]
+        },
+        "LinReg Synth:100Kx20": {
+            "INCLUDE": ["implementations", "linear parameters", "Synth:100Kx20"]
+        },
+        "LinReg Synth:300x4": {
+            "INCLUDE": ["implementations", "linear parameters", "Synth:300x4"]
+        },
+        "LinReg Synth:500Kx5": {
+            "INCLUDE": ["implementations", "linear parameters", "Synth:500Kx5"]
+        }
+    }
+}
