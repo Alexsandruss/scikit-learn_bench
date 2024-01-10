@@ -33,17 +33,53 @@
             },
             "algorithm": {
                 "estimator_params": {
-                    "n_components": 1.0
+                    "n_components": 1
+                }
+            }
+        },
+        "Synthetic:300Mx10": {
+            "data": {
+                "source": "make_blobs",
+                "generation_kwargs": {
+                    "n_samples": 300000000,
+                    "n_features": 10,
+                    "centers": 2
+                }
+            },
+            "algorithm": {
+                "estimator_params": {
+                    "n_components": 1
+                }
+            }
+        },
+        "Synthetic:10Mx900": {
+            "data": {
+                "source": "make_blobs",
+                "generation_kwargs": {
+                    "n_samples": 10000000,
+                    "n_features": 900,
+                    "centers": 2
+                }
+            },
+            "algorithm": {
+                "estimator_params": {
+                    "n_components": 1
                 }
             }
         }
     },
     "TEMPLATES": {
-        "KnnBFCls Higgs:1M": {
+        "PCA Higgs:1M": {
             "INCLUDE": ["implementations", "pca parameters", "Higgs:1M"]
         },
-        "KnnBFCls Epsilon:30K": {
+        "PCA Epsilon:30K": {
             "INCLUDE": ["implementations", "pca parameters", "Epsilon:30K"]
+        },
+        "PCA Synthetic:300Mx10": {
+            "INCLUDE": ["implementations", "pca parameters", "Synthetic:300Mx10"]
+        },
+        "PCA Synthetic:10Mx900": {
+            "INCLUDE": ["implementations", "pca parameters", "Synthetic:10Mx900"]
         }
     }
 }

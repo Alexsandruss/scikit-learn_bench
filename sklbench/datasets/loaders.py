@@ -360,7 +360,7 @@ def load_epsilon(
     x_train, y_train = load_svmlight_file(local_url_train, dtype=np.float32)
     x_test, y_test = load_svmlight_file(local_url_test, dtype=np.float32)
 
-    x = np.vstack([x_train, x_test])
+    x = sparse.vstack([x_train, x_test])
     y = np.vstack([y_train, y_test])
     y[y <= 0] = 0
 

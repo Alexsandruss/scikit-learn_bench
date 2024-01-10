@@ -26,6 +26,76 @@
                     "train_file": "epsilon_80k_train.csv"
                 }
             }
+        },
+        "Synthetic:300Mx10": {
+            "data": {
+                "source": "make_blobs",
+                "generation_kwargs": {
+                    "n_samples": 300000000,
+                    "n_features": 10,
+                    "centers": 1
+                }
+            }
+        },
+        "Synthetic:10Mx900": {
+            "data": {
+                "source": "make_blobs",
+                "generation_kwargs": {
+                    "n_samples": 10000000,
+                    "n_features": 900,
+                    "centers": 1
+                }
+            }
+        },
+        "Synthetic:50Kx50": {
+            "data": {
+                "source": "make_blobs",
+                "generation_kwargs": {
+                    "n_samples": 50000,
+                    "n_features": 50,
+                    "centers": 1
+                }
+            }
+        },
+        "Synthetic:100Kx38K": {
+            "data": {
+                "source": "make_blobs",
+                "generation_kwargs": {
+                    "n_samples": 100000,
+                    "n_features": 38000,
+                    "centers": 1
+                }
+            }
+        },
+        "Synthetic:100Kx100K": {
+            "data": {
+                "source": "make_blobs",
+                "generation_kwargs": {
+                    "n_samples": 100000,
+                    "n_features": 100000,
+                    "centers": 1
+                }
+            }
+        },
+        "Synthetic:690Kx2220": {
+            "data": {
+                "source": "make_blobs",
+                "generation_kwargs": {
+                    "n_samples": 690000,
+                    "n_features": 2220,
+                    "centers": 1
+                }
+            }
+        },
+        "Synthetic:6Kx600": {
+            "data": {
+                "source": "make_blobs",
+                "generation_kwargs": {
+                    "n_samples": 6000,
+                    "n_features": 600,
+                    "centers": 1
+                }
+            }
         }
     },
     "TEMPLATES": {
@@ -34,6 +104,27 @@
         },
         "Moments Epsilon:80K": {
             "INCLUDE": ["implementations", "basicstats parameters", "Epsilon:80K"]
+        },
+        "Moments Synthetic:300Mx10": {
+            "INCLUDE": ["implementations", "basicstats parameters", "Synthetic:300Mx10"]
+        },
+        "Moments Synthetic:10Mx900": {
+            "INCLUDE": ["implementations", "basicstats parameters", "Synthetic:10Mx900"]
+        },
+        "Moments Synthetic:50Kx50": {
+            "INCLUDE": ["implementations", "basicstats parameters", "Synthetic:50Kx50"]
+        },
+        "Moments Synthetic:100Kx38K": {
+            "INCLUDE": ["implementations", "basicstats parameters", "Synthetic:100Kx38K"]
+        },
+        "Moments Synthetic:100Kx100K": {
+            "INCLUDE": ["implementations", "basicstats parameters", "Synthetic:100Kx100K"]
+        },
+        "Moments Synthetic:690Kx2220": {
+            "INCLUDE": ["implementations", "basicstats parameters", "Synthetic:690Kx2220"]
+        },
+        "Moments Synthetic:6Kx600": {
+            "INCLUDE": ["implementations", "basicstats parameters", "Synthetic:6Kx600"]
         }
     }
 }

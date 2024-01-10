@@ -378,11 +378,6 @@ def main(bench_case: BenchCase, filters: List[BenchCase]):
     estimator_class = get_estimator(library_name, estimator_name)
     task = estimator_to_task(estimator_name)
 
-    # load and transform data
-    data, data_description = load_data(bench_case)
-    (x_train, x_test, y_train, y_test), data_description = split_and_transform_data(
-        bench_case, data, data_description
-    )
     if dpctl.has_gpu_devices:
         q = dpctl.SyclQueue("gpu")
     else:
@@ -390,6 +385,12 @@ def main(bench_case: BenchCase, filters: List[BenchCase]):
             "GPU devices unavailable. Currently, "
             "SPMD execution mode is implemented only for this device type."
         )
+
+    # load and transform data
+    data, data_description = load_data(bench_case)
+    (x_train, x_test, y_train, y_test), data_description = split_and_transform_data(
+        bench_case, data, data_description
+    )
     
     train_rows = x_train.shape[0]
     test_rows = x_test.shape[0]
@@ -429,7 +430,6 @@ def main(bench_case: BenchCase, filters: List[BenchCase]):
         return list()
 
     # run estimator methods
-    # raise ValueError(estimator_class, estimator_methods)
     context_class, context_params = get_context(bench_case)
     metrics, estimator_instance = measure_sklearn_estimator(
         bench_case,

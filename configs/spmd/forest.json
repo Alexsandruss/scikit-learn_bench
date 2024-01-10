@@ -124,6 +124,108 @@
                     "max_depth": 8
                 }
             }
+        },
+        "Synth:10K+10Kx7;nT:100;D:10": {
+            "data": {
+                "source": "make_classification",
+                "split_kwargs": {
+                    "train_size": 10000,
+                    "test_size": 10000
+                },
+                "generation_kwargs": {
+                    "n_samples": 20000,
+                    "n_features": 7,
+                    "n_classes": 10,
+                    "n_informative": "[SPECIAL_VALUE]0.5"
+                }
+            },
+            "algorithm": {
+                "estimator_params": {
+                    "n_estimators": 100,
+                    "max_depth": 10
+                }
+            }
+        },
+        "Synth:5M+5Kx5;nT:5;D:3": {
+            "data": {
+                "source": "make_classification",
+                "split_kwargs": {
+                    "train_size": 5000000,
+                    "test_size": 5000
+                },
+                "generation_kwargs": {
+                    "n_samples": 5005000,
+                    "n_features": 5,
+                    "n_classes": 8,
+                    "n_informative": "[SPECIAL_VALUE]0.5"
+                }
+            },
+            "algorithm": {
+                "estimator_params": {
+                    "n_estimators": 5,
+                    "max_depth": 3
+                }
+            }
+        },
+        "Synth:1M+5Kx20;nT:30;D:15": {
+            "data": {
+                "source": "make_regression",
+                "split_kwargs": {
+                    "train_size": 1000000,
+                    "test_size": 5000
+                },
+                "generation_kwargs": {
+                    "n_samples": 1005000,
+                    "n_features": 20,
+                    "noise": 1.25
+                }
+            },
+            "algorithm": {
+                "estimator_params": {
+                    "n_estimators": 30,
+                    "max_depth": 15
+                }
+            }
+        },
+        "Synth:300+5Mx4;nT:30;D:5": {
+            "data": {
+                "source": "make_regression",
+                "split_kwargs": {
+                    "train_size": 300,
+                    "test_size": 5000000
+                },
+                "generation_kwargs": {
+                    "n_samples": 5000300,
+                    "n_features": 4,
+                    "noise": 1.25
+                }
+            },
+            "algorithm": {
+                "estimator_params": {
+                    "n_estimators": 30,
+                    "max_depth": 5
+                }
+            }
+        },
+        "Synth:5M+5Kx5;nT:10;D:4": {
+            "data": {
+                "source": "make_regression",
+                "split_kwargs": {
+                    "train_size": 5000000,
+                    "test_size": 5000
+                },
+                "generation_kwargs": {
+                    "n_samples": 5005000,
+                    "n_features": 5,
+                    "noise": 1.25
+                }
+            },
+            "algorithm": {
+                "estimator_params": {
+                    "n_estimators": 10,
+                    "max_depth": 4
+                }
+            }
         }
     },
     "TEMPLATES": {
@@ -136,6 +238,12 @@
         "ForestCls Hepmass:150K;nT:50;D:15": {
             "INCLUDE": ["implementations", "rfcls parameters", "Hepmass:150K;nT:50;D:15"]
         },
+        "ForestCls Synth:10K+10Kx7;nT:100;D:10": {
+            "INCLUDE": ["implementations", "rfcls parameters", "Synth:10K+10Kx7;nT:100;D:10"]
+        },
+        "ForestCls Synth:5M+5Kx5;nT:5;D:3": {
+            "INCLUDE": ["implementations", "rfcls parameters", "Synth:5M+5Kx5;nT:5;D:3"]
+        },
         "ForestReg YearMsdTrain:463K;nT:10;D:5": {
             "INCLUDE": ["implementations", "rfreg parameters", "YearMsdTrain:463K;nT:10;D:5"]
         },
@@ -147,6 +255,15 @@
         },
         "ForestReg Higgs:1M;nT:20;D:8": {
             "INCLUDE": ["implementations", "rfreg parameters", "Higgs:1M;nT:20;D:8"]
+        },
+        "ForestReg Synth:1M+5Kx20;nT:30;D:15": {
+            "INCLUDE": ["implementations", "rfreg parameters", "Synth:1M+5Kx20;nT:30;D:15"]
+        },
+        "ForestReg Synth:300+5Mx4;nT:30;D:5": {
+            "INCLUDE": ["implementations", "rfreg parameters", "Synth:300+5Mx4;nT:30;D:5"]
+        },
+        "ForestReg Synth:5M+5Kx5;nT:10;D:4": {
+            "INCLUDE": ["implementations", "rfreg parameters", "Synth:5M+5Kx5;nT:10;D:4"]
         }
     }
 }
