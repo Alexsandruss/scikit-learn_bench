@@ -100,7 +100,87 @@
 					}
 				}
 			]
-		}
+		},
+        "Synthetic:400Kx24": {
+            "data": {
+                "source": "make_blobs",
+                "generation_kwargs": {
+                    "n_samples": 400000,
+                    "n_features": 24,
+                    "centers": 10
+                }
+            },
+			"algorithm": {
+				"estimator_params": {
+					"n_clusters": 10,
+					"max_iter": 10
+				}
+			}
+        },
+        "Synthetic:100Kx50": {
+            "data": {
+                "source": "make_blobs",
+                "generation_kwargs": {
+                    "n_samples": 100000,
+                    "n_features": 50,
+                    "centers": 20
+                }
+            },
+			"algorithm": {
+				"estimator_params": {
+					"n_clusters": [20, 30],
+					"max_iter": 10
+				}
+			}
+        },
+        "Synthetic:80Mx28": {
+            "data": {
+                "source": "make_blobs",
+                "generation_kwargs": {
+                    "n_samples": 80000000,
+                    "n_features": 28,
+                    "centers": 30
+                }
+            },
+			"algorithm": {
+				"estimator_params": {
+					"n_clusters": 30,
+					"max_iter": 10
+				}
+			}
+        },
+        "Synthetic:1Mx40": {
+            "data": {
+                "source": "make_blobs",
+                "generation_kwargs": {
+                    "n_samples": 1000000,
+                    "n_features": 40,
+                    "centers": 10
+                }
+            },
+			"algorithm": {
+				"estimator_params": {
+					"n_clusters": 10,
+					"max_iter": 10
+				}
+			}
+        },
+        "Synthetic:2Mx20": {
+            "data": {
+                "source": "make_blobs",
+                "generation_kwargs": {
+                    "n_samples": 2000000,
+                    "n_features": 20,
+                    "centers": 30
+                }
+            },
+			"algorithm": {
+				"estimator_params": {
+					"n_clusters": 30,
+					"max_iter": 10
+				}
+			}
+        }
 	},
     "TEMPLATES": {
         "KMeans Higgs:1M": {
@@ -114,6 +194,21 @@
         },
         "KMeans Susy:4.5M": {
             "INCLUDE": ["implementations", "kmeans parameters", "Susy:4.5M"]
+        },
+        "KMeans Synthetic:400Kx24": {
+            "INCLUDE": ["implementations", "kmeans parameters", "Synthetic:400Kx24"]
+        },
+        "KMeans Synthetic:100Kx50": {
+            "INCLUDE": ["implementations", "kmeans parameters", "Synthetic:100Kx50"]
+        },
+        "KMeans Synthetic:80Mx28": {
+            "INCLUDE": ["implementations", "kmeans parameters", "Synthetic:80Mx28"]
+        },
+        "KMeans Synthetic:1Mx40": {
+            "INCLUDE": ["implementations", "kmeans parameters", "Synthetic:1Mx40"]
+        },
+        "KMeans Synthetic:2Mx20": {
+            "INCLUDE": ["implementations", "kmeans parameters", "Synthetic:2Mx20"]
         }
     }
 }
