@@ -76,9 +76,9 @@ def generate_benchmark_command(
                 comm = MPI.COMM_WORLD
                 rank = comm.Get_rank()
                 size = comm.Get_size()
-                mpi_n = get_bench_case_value(bench_case, "algorithm:n")
+                mpi_n = get_bench_case_value(bench_case, "algorithm:num_procs")
                 if mpi_n is not None:
-                    mpi_ppn = get_bench_case_value(bench_case, "algorithm:ppn") or mpi_n
+                    mpi_ppn = get_bench_case_value(bench_case, "algorithm:procs_per_node") or mpi_n
                 else:
                     raise ValueError("Specify n for distributed mode")
                 benchmark_name = "distr_sklearn_estimator"

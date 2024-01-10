@@ -2,7 +2,7 @@
     "PARAMETERS_SETS": {
         "implementations": {
             "algorithm": [
-                { "library": "sklearnex", "device": "distributed", "n": 2, "ppn": 2 }
+                { "library": "sklearnex", "device": "distributed", "num_procs": 2, "procs_per_node": 2 }
             ]
         },
         "rfcls parameters": {
