@@ -2,7 +2,7 @@
     "PARAMETERS_SETS": {
         "implementations": {
             "algorithm": [
-                { "library": "onedal", "device": "distributed", "num_procs": 2, "procs_per_node": 2 }
+                { "library": "sklearnex", "device": "distributed", "num_procs": 2, "procs_per_node": 2 }
             ]
         },
         "pca parameters": {
