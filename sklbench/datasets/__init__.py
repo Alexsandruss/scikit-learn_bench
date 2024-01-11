@@ -48,8 +48,9 @@ def load_data(bench_case: BenchCase) -> Tuple[Dict, Dict]:
     dataset = get_bench_case_value(bench_case, "data:dataset")
     if dataset is not None:
         dataset_params = get_bench_case_value(bench_case, "data:dataset_kwargs", dict())
-        if os.environ.get("DATASETSROOT") and "train_file" in dataset_params.keys():
-            return load_from_datasetsroot(data_name, dataset_params=dataset_params)
+        datasets_root = os.environ.get("DATASETSROOT")
+        if datasets_root and "train_file" in dataset_params.keys():
+            return load_from_datasetsroot(data_name, dataset_params=dataset_params, datasets_root=datasets_root)
         else:
             return dataset_loading_functions[dataset](
                 **common_kwargs, preproc_kwargs=preproc_kwargs, dataset_params=dataset_params

@@ -769,16 +769,16 @@ def load_road_network(
 
 
 def load_from_datasetsroot(
-    data_name: str, dataset_params: Dict
+    data_name: str, dataset_params: Dict, datasets_root: str
 ) -> Tuple[Dict, Dict]:
-    datasets_path = os.environ.get("DATASETSROOT")
-    if datasets_path and os.path.exists(datasets_path + "/workloads/" + data_name + "/dataset/" + dataset_params.get("train_file")):
-        train_df = pd.read_csv(datasets_path + "/workloads/" + data_name + "/dataset/" + dataset_params.get("train_file"))
+    dataset_root = f"{datasets_root}/workloads/{data_name}/dataset/"
+    if os.path.exists(dataset_root + dataset_params.get("train_file")):
+        train_df = pd.read_csv(dataset_root + dataset_params.get("train_file"))
         x_train = train_df.iloc[:, :-1].to_numpy(dtype=np.float32)
         y_train = train_df.iloc[:, -1].to_numpy(dtype=np.float32).reshape((-1, 1))
         
         if dataset_params.get("test_file"):
-            test_df = pd.read_csv(datasets_path + "/workloads/" + data_name + "/dataset/" + dataset_params.get("test_file"))
+            test_df = pd.read_csv(dataset_root + dataset_params.get("test_file"))
             x_test = test_df.iloc[:, :-1].to_numpy(dtype=np.float32)
             y_test = test_df.iloc[:, -1].to_numpy(dtype=np.float32).reshape((-1, 1))
             x = np.vstack([x_train, x_test])
