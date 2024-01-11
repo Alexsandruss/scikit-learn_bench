@@ -48,8 +48,8 @@ from ..utils.special_params import assign_case_special_values_on_run
 from .common import main_template
 
 
-def get_estimator(library_name: str, estimator_name: str):
-    classes_map, _ = get_module_members(library_name.split("."))
+def get_estimator(library_name: str, estimator_name: str, distributed: bool = False):
+    classes_map, _ = get_module_members(library_name.split("."), distributed=distributed)
     if estimator_name not in classes_map:
         raise ValueError(
             f"Unable to find {estimator_name} estimator in {library_name} module."

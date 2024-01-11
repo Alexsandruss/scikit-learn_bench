@@ -151,7 +151,7 @@ def assign_case_special_values_on_run(
     estimator = get_bench_case_value(bench_case, "algorithm:estimator", None)
     # device-related parameters assignment
     device = get_bench_case_value(bench_case, "algorithm:device", "default")
-    if device != "default":
+    if device != "default" and device != "distributed":
         # xgboost tree method assignment branch
         if library == "xgboost" and estimator in ["XGBRegressor", "XGBClassifier"]:
             orig_tree_method = get_bench_case_value(

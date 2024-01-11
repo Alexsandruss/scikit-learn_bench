@@ -786,8 +786,6 @@ def load_from_datasetsroot(
             data_desc = {"default_split": { "train_size": y_train.shape[0], "test_size": y_test.shape[0], "shuffle": False}}
         else:
             x = np.vstack([x_train])
-            y = np.vstack([y_train])
-            # data_desc = {}
             return {"x": x}, {}
         if dataset_params.get("n_classes"):
             data_desc.update({"n_classes": dataset_params.get("n_classes")})
