@@ -1,0 +1,78 @@
+{
+    "PARAMETERS_SETS": {
+        "implementations": {
+            "algorithm": [
+                { "library": "sklearnex", "device": "distributed", "num_procs": 2, "procs_per_node": 2 }
+            ]
+        },
+        "rfreg parameters": {
+            "algorithm": {
+                "estimator": "RandomForestRegressor",
+                "estimator_params": { 
+                    "criterion": "squared_error",
+                    "max_features": 1.0,
+                    "n_estimators": 10,
+                    "max_depth": 4
+                }
+            }
+        },
+        "linear parameters": {
+            "algorithm": {
+                "estimator": "LinearRegression"
+            }
+        },
+        "knnreg parameters": {
+            "algorithm": {
+                "estimator": "KNeighborsRegressor",
+                "estimator_params": {
+                    "algorithm": "brute",
+                    "n_neighbors": 3
+                }
+            }
+        },
+        "synth": {
+            "data": {
+                "source": "make_regression",
+                "split_kwargs": {
+                    "train_size": 10000,
+                    "test_size": 5000
+                },
+                "generation_kwargs": {
+                    "n_samples": 15000,
+                    "n_features": 5,
+                    "noise": 1.25
+                }
+            }
+        },
+        "higgs": {
+            "data": {
+                "dataset": "higgs",
+                "dataset_kwargs": {
+                    "train_file": "higgs_100t_train.csv",
+                    "test_file": "higgs_50t_test.csv",
+                    "n_classes": 2
+                }
+            }
+        }
+    },
+    "TEMPLATES": {
+        "LinReg Higgs": {
+            "INCLUDE": ["implementations", "linear parameters", "higgs"]
+        },
+        "LinReg Synthetic": {
+            "INCLUDE": ["implementations", "linear parameters", "synth"]
+        },
+        "KnnReg Higgs": {
+            "INCLUDE": ["implementations", "knnreg parameters", "higgs"]
+        },
+        "KnnReg Synthetic": {
+            "INCLUDE": ["implementations", "knnreg parameters", "synth"]
+        },
+        "RFReg Higgs": {
+            "INCLUDE": ["implementations", "rfreg parameters", "higgs"]
+        },
+        "RFReg Synthetic": {
+            "INCLUDE": ["implementations", "rfreg parameters", "synth"]
+        }
+    }
+}
