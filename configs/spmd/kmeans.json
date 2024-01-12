@@ -13,202 +13,30 @@
                 }
             }
         },
-		"Higgs:1M": {
-			"data": {
-				"dataset": "higgs",
-				"dataset_kwargs": {
-					"train_file": "higgs_50t_test.csv"
-				}
-			},
-			"algorithm": [
-				{
-					"estimator_params": {
-						"n_clusters": 2,
-						"max_iter": 2
-					}
-				}
-			]
+        "real datasets": {
+            "data": [
+                { "dataset": "higgs",   "dataset_kwargs": { "train_file": "higgs_50t_test.csv" },    "algorithm": { "estimator_params": [ { "n_clusters": 10, "max_iter": 100 }, { "n_clusters": 100, "max_iter": 10 }, { "n_clusters": 250, "max_iter": 10 } ] } },
+                { "dataset": "epsilon", "dataset_kwargs": { "train_file": "epsilon_50k_train.csv" }, "algorithm": { "estimator_params": { "n_clusters": [512, 1024, 2048], "max_iter": 10 } } },
+                { "dataset": "hepmass", "dataset_kwargs": { "train_file": "hepmass_1m_train.csv" },  "algorithm": { "estimator_params": [ { "n_clusters": 10, "max_iter": 100 }, { "n_clusters": 100, "max_iter": 10 }, { "n_clusters": 250, "max_iter": 10 } ] } },
+                { "dataset": "susy",    "dataset_kwargs": { "train_file": "susy_train.csv" },        "algorithm": { "estimator_params": { "n_clusters": 10, "max_iter": 100 } } }
+            ]
 		},
-		"Epsilon:50K": {
-			"data": {
-				"dataset": "epsilon",
-				"dataset_kwargs": {
-					"train_file": "epsilon_50k_train.csv"
-				}
-			},
-			"algorithm": [
-				{
-					"estimator_params": {
-						"n_clusters": 512,
-						"max_iter": 10
-					}
-				},
-				{
-					"estimator_params": {
-						"n_clusters": 1024,
-						"max_iter": 10
-					}
-				},
-				{
-					"estimator_params": {
-						"n_clusters": 2048,
-						"max_iter": 10
-					}
-				}
+		"synthetic data": {
+			"data": [
+				{ "source": "make_blobs", "generation_kwargs": { "n_samples": 400000,   "n_features": 24, "centers": 10 }, "algorithm": { "n_clusters": 10, "max_iter": 10 } },
+				{ "source": "make_blobs", "generation_kwargs": { "n_samples": 100000,   "n_features": 50, "centers": 20 }, "algorithm": { "n_clusters": [20, 30], "max_iter": 10 } },
+				{ "source": "make_blobs", "generation_kwargs": { "n_samples": 80000000, "n_features": 28, "centers": 30 }, "algorithm": { "n_clusters": 30, "max_iter": 10 } },
+				{ "source": "make_blobs", "generation_kwargs": { "n_samples": 1000000,  "n_features": 40, "centers": 10 }, "algorithm": { "n_clusters": 10, "max_iter": 10 } },
+				{ "source": "make_blobs", "generation_kwargs": { "n_samples": 2000000,  "n_features": 20, "centers": 30 }, "algorithm": { "n_clusters": 30, "max_iter": 10 } }
 			]
-		},
-		"Hepmass:1M": {
-			"data": {
-				"dataset": "hepmass",
-				"dataset_kwargs": {
-					"train_file": "hepmass_1m_train.csv"
-				}
-			},
-			"algorithm": [
-				{
-					"estimator_params": {
-						"n_clusters": 10,
-						"max_iter": 100
-					}
-				},
-				{
-					"estimator_params": {
-						"n_clusters": 100,
-						"max_iter": 10
-					}
-				},
-				{
-					"estimator_params": {
-						"n_clusters": 250,
-						"max_iter": 10
-					}
-				}
-			]
-		},
-		"Susy:4.5M": {
-			"data": {
-				"dataset": "susy",
-				"dataset_kwargs": {
-					"train_file": "susy_train.csv"
-				}
-			},
-			"algorithm": [
-				{
-					"estimator_params": {
-						"n_clusters": 10,
-						"max_iter": 100
-					}
-				}
-			]
-		},
-        "Synthetic:400Kx24": {
-            "data": {
-                "source": "make_blobs",
-                "generation_kwargs": {
-                    "n_samples": 400000,
-                    "n_features": 24,
-                    "centers": 10
-                }
-            },
-			"algorithm": {
-				"estimator_params": {
-					"n_clusters": 10,
-					"max_iter": 10
-				}
-			}
-        },
-        "Synthetic:100Kx50": {
-            "data": {
-                "source": "make_blobs",
-                "generation_kwargs": {
-                    "n_samples": 100000,
-                    "n_features": 50,
-                    "centers": 20
-                }
-            },
-			"algorithm": {
-				"estimator_params": {
-					"n_clusters": [20, 30],
-					"max_iter": 10
-				}
-			}
-        },
-        "Synthetic:80Mx28": {
-            "data": {
-                "source": "make_blobs",
-                "generation_kwargs": {
-                    "n_samples": 80000000,
-                    "n_features": 28,
-                    "centers": 30
-                }
-            },
-			"algorithm": {
-				"estimator_params": {
-					"n_clusters": 30,
-					"max_iter": 10
-				}
-			}
-        },
-        "Synthetic:1Mx40": {
-            "data": {
-                "source": "make_blobs",
-                "generation_kwargs": {
-                    "n_samples": 1000000,
-                    "n_features": 40,
-                    "centers": 10
-                }
-            },
-			"algorithm": {
-				"estimator_params": {
-					"n_clusters": 10,
-					"max_iter": 10
-				}
-			}
-        },
-        "Synthetic:2Mx20": {
-            "data": {
-                "source": "make_blobs",
-                "generation_kwargs": {
-                    "n_samples": 2000000,
-                    "n_features": 20,
-                    "centers": 30
-                }
-            },
-			"algorithm": {
-				"estimator_params": {
-					"n_clusters": 30,
-					"max_iter": 10
-				}
-			}
-        }
+		}
 	},
     "TEMPLATES": {
-        "KMeans Higgs:1M": {
-            "INCLUDE": ["implementations", "kmeans parameters", "Higgs:1M"]
+        "KMeans Real Datasets": {
+            "INCLUDE": ["implementations", "kmeans parameters", "real datasets"]
         },
-        "KMeans Epsilon:50K": {
-            "INCLUDE": ["implementations", "kmeans parameters", "Epsilon:50K"]
-        },
-        "KMeans Hepmass:1M": {
-            "INCLUDE": ["implementations", "kmeans parameters", "Hepmass:1M"]
-        },
-        "KMeans Susy:4.5M": {
-            "INCLUDE": ["implementations", "kmeans parameters", "Susy:4.5M"]
-        },
-        "KMeans Synthetic:400Kx24": {
-            "INCLUDE": ["implementations", "kmeans parameters", "Synthetic:400Kx24"]
-        },
-        "KMeans Synthetic:100Kx50": {
-            "INCLUDE": ["implementations", "kmeans parameters", "Synthetic:100Kx50"]
-        },
-        "KMeans Synthetic:80Mx28": {
-            "INCLUDE": ["implementations", "kmeans parameters", "Synthetic:80Mx28"]
-        },
-        "KMeans Synthetic:1Mx40": {
-            "INCLUDE": ["implementations", "kmeans parameters", "Synthetic:1Mx40"]
-        },
-        "KMeans Synthetic:2Mx20": {
-            "INCLUDE": ["implementations", "kmeans parameters", "Synthetic:2Mx20"]
+        "KMeans Synthetic Data": {
+            "INCLUDE": ["implementations", "kmeans parameters", "synthetic data"]
         }
     }
 }

@@ -21,349 +21,52 @@
                 }
             }
         },
-        "Epsilon:100K;k:2": {
-            "data": {
-                "dataset": "epsilon",
-                "dataset_kwargs": {
-                    "train_file": "epsilon_50k_train.csv",
-                    "test_file": "epsilon_50k_train.csv",
-                    "n_classes": 2
-                }
-            },
-            "algorithm": {
-                "estimator_params": {
-                    "n_neighbors": 2
-                }
-            }
+        "real classification datasets": {
+            "data": [
+                { "dataset": "epsilon", "dataset_kwargs": { "train_file": "epsilon_50k_train.csv",      "test_file": "epsilon_50k_train.csv",     "n_classes": 2 },  "algorithm": { "estimator_params": { "n_neighbors": [2, 100] } } },
+                { "dataset": "higgs",   "dataset_kwargs": { "train_file": "higgs_100t_train.csv",       "test_file": "higgs_50t_test.csv",        "n_classes": 2 },  "algorithm": { "estimator_params": { "n_neighbors": [5, 100] } } },
+                { "dataset": "hepmass", "dataset_kwargs": { "train_file": "hepmass_100t_train.csv",     "test_file": "hepmass_50t_test.csv",      "n_classes": 2 },  "algorithm": { "estimator_params": { "n_neighbors": [5, 100] } } },
+                { "dataset": "gist",    "dataset_kwargs": { "train_file": "gist_100k.csv",              "test_file": "gist_50k.csv",              "n_classes": 2 },  "algorithm": { "estimator_params": { "n_neighbors": 3 } } },
+                { "dataset": "gist",    "dataset_kwargs": { "train_file": "gist_200k.csv",              "test_file": "gist_100k.csv",             "n_classes": 2 },  "algorithm": { "estimator_params": { "n_neighbors": 3 } } },
+                { "dataset": "cifar",   "dataset_kwargs": { "train_file": "cifar_50k_train_binary.csv", "test_file": "cifar_10k_test_binary.csv", "n_classes": 2 },  "algorithm": { "estimator_params": { "n_neighbors": 7 } } },
+                { "dataset": "mnist",   "dataset_kwargs": { "train_file": "mnist_train.csv",            "test_file": "mnist_test.csv",            "n_classes": 10 }, "algorithm": { "estimator_params": { "n_neighbors": 5 } } }
+            ]
         },
-        "Higgs:150K;k:5": {
-            "data": {
-                "dataset": "higgs",
-                "dataset_kwargs": {
-                    "train_file": "higgs_100t_train.csv",
-                    "test_file": "higgs_50t_test.csv",
-                    "n_classes": 2
-                }
-            },
-            "algorithm": {
-                "estimator_params": {
-                    "n_neighbors": 5
-                }
-            }
+        "real regression datasets": {
+            "data": [
+                { "dataset": "year_prediction_msd", "dataset_kwargs": { "train_file": "year_prediction_msd_train.csv", "test_file": "year_prediction_msd_test.csv" }, "algorithm": { "estimator_params": { "n_neighbors": 2 } } },
+                { "dataset": "higgs",               "dataset_kwargs": { "train_file": "higgs_100t_train.csv",          "test_file": "higgs_50t_test.csv" },           "algorithm": { "estimator_params": { "n_neighbors": 5 } } },
+                { "dataset": "gist",                "dataset_kwargs": { "train_file": "gist_100k.csv",                 "test_file": "gist_50k.csv" },                 "algorithm": { "estimator_params": { "n_neighbors": 3 } } },
+                { "dataset": "cifar",               "dataset_kwargs": { "train_file": "cifar_50k_train_binary.csv",    "test_file": "cifar_10k_test_binary.csv" },    "algorithm": { "estimator_params": { "n_neighbors": 7 } } }
+            ]
         },
-        "Hepmass:150K;k:5": {
-            "data": {
-                "dataset": "hepmass",
-                "dataset_kwargs": {
-                    "train_file": "hepmass_100t_train.csv",
-                    "test_file": "hepmass_50t_test.csv",
-                    "n_classes": 2
-                }
-            },
-            "algorithm": {
-                "estimator_params": {
-                    "n_neighbors": 5
-                }
-            }
+        "synthetic classification data": {
+            "data": [
+                { "source": "make_classification", "split_kwargs": { "train_size": 500000, "test_size": 500000 },   "generation_kwargs": {  "n_samples": 1000000,  "n_features": 10, "n_classes": 16,  "n_informative": "[SPECIAL_VALUE]0.5" },  "algorithm": { "estimator_params": { "n_neighbors": 100 } } },
+                { "source": "make_classification", "split_kwargs": { "train_size": 100000, "test_size": 50000000 }, "generation_kwargs": {  "n_samples": 50100000, "n_features": 20, "n_classes": 10,  "n_informative": "[SPECIAL_VALUE]0.5" },  "algorithm": { "estimator_params": { "n_neighbors": 5 } } },
+                { "source": "make_classification", "split_kwargs": { "train_size": 1000000, "test_size": 1000000 }, "generation_kwargs": {  "n_samples": 2000000,  "n_features": 5,  "n_classes": 4,   "n_informative": "[SPECIAL_VALUE]0.5" },  "algorithm": { "estimator_params": { "n_neighbors": 5 } } },
+                { "source": "make_classification", "split_kwargs": { "train_size": 1000000, "test_size": 100000 },  "generation_kwargs": {  "n_samples": 1100000,  "n_features": 20, "n_classes": 100, "n_informative": "[SPECIAL_VALUE]0.5" },  "algorithm": { "estimator_params": { "n_neighbors": 5 } } }
+            ]
         },
-        "Epsilon:100K;k:100": {
-            "data": {
-                "dataset": "epsilon",
-                "dataset_kwargs": {
-                    "train_file": "epsilon_50k_train.csv",
-                    "test_file": "epsilon_50k_train.csv",
-                    "n_classes": 2
-                }
-            },
-            "algorithm": {
-                "estimator_params": {
-                    "n_neighbors": 100
-                }
-            }
-        },
-        "Higgs:150K;k:100": {
-            "data": {
-                "dataset": "higgs",
-                "dataset_kwargs": {
-                    "train_file": "higgs_100t_train.csv",
-                    "test_file": "higgs_50t_test.csv",
-                    "n_classes": 2
-                }
-            },
-            "algorithm": {
-                "estimator_params": {
-                    "n_neighbors": 100
-                }
-            }
-        },
-        "Hepmass:150K;k:100": {
-            "data": {
-                "dataset": "hepmass",
-                "dataset_kwargs": {
-                    "train_file": "hepmass_100t_train.csv",
-                    "test_file": "hepmass_50t_test.csv",
-                    "n_classes": 2
-                }
-            },
-            "algorithm": {
-                "estimator_params": {
-                    "n_neighbors": 100
-                }
-            }
-        },
-        "Gist:150K;k:3": {
-            "data": {
-                "dataset": "gist",
-                "dataset_kwargs": {
-                    "train_file": "gist_100k.csv",
-                    "test_file": "gist_50k.csv",
-                    "n_classes": 2
-                }
-            },
-            "algorithm": {
-                "estimator_params": {
-                    "n_neighbors": 3
-                }
-            }
-        },
-        "Gist:300K;k:3": {
-            "data": {
-                "dataset": "gist",
-                "dataset_kwargs": {
-                    "train_file": "gist_200k.csv",
-                    "test_file": "gist_100k.csv",
-                    "n_classes": 2
-                }
-            },
-            "algorithm": {
-                "estimator_params": {
-                    "n_neighbors": 3
-                }
-            }
-        },
-        "Cifar:50K;k:7": {
-            "data": {
-                "dataset": "cifar",
-                "dataset_kwargs": {
-                    "train_file": "cifar_50k_train_binary.csv",
-                    "test_file": "cifar_10k_test_binary.csv",
-                    "n_classes": 2
-                }
-            },
-            "algorithm": {
-                "estimator_params": {
-                    "n_neighbors": 7
-                }
-            }
-        },
-        "Mnist:60K;k:5": {
-            "data": {
-                "dataset": "mnist",
-                "dataset_kwargs": {
-                    "train_file": "mnist_train.csv",
-                    "test_file": "mnist_test.csv",
-                    "n_classes": 10
-                }
-            },
-            "algorithm": {
-                "estimator_params": {
-                    "n_neighbors": 5
-                }
-            }
-        },
-        "YearMsdTrain:463K;k:2": {
-            "data": {
-                "dataset": "year_prediction_msd",
-                "dataset_kwargs": {
-                    "train_file": "year_prediction_msd_train.csv",
-                    "test_file": "year_prediction_msd_test.csv"
-                }
-            },
-            "algorithm": {
-                "estimator_params": {
-                    "n_neighbors": 2
-                }
-            }
-        },
-        "Synth:500K+500Kx10;k:100": {
-            "data": {
-                "source": "make_classification",
-                "split_kwargs": {
-                    "train_size": 500000,
-                    "test_size": 500000
-                },
-                "generation_kwargs": {
-                    "n_samples": 1000000,
-                    "n_features": 10,
-                    "n_classes": 16,
-                    "n_informative": "[SPECIAL_VALUE]0.5"
-                },
-                "algorithm": {
-                    "estimator_params": {
-                        "n_neighbors": 100
-                    }
-                }
-            }
-        },
-        "Synth:100K+50Mx20;k:5": {
-            "data": {
-                "source": "make_classification",
-                "split_kwargs": {
-                    "train_size": 100000,
-                    "test_size": 50000000
-                },
-                "generation_kwargs": {
-                    "n_samples": 50100000,
-                    "n_features": 20,
-                    "n_classes": 10,
-                    "n_informative": "[SPECIAL_VALUE]0.5"
-                },
-                "algorithm": {
-                    "estimator_params": {
-                        "n_neighbors": 5
-                    }
-                }
-            }
-        },
-        "Synth:1M+1Mx5;k:5": {
-            "data": {
-                "source": "make_classification",
-                "split_kwargs": {
-                    "train_size": 1000000,
-                    "test_size": 1000000
-                },
-                "generation_kwargs": {
-                    "n_samples": 2000000,
-                    "n_features": 5,
-                    "n_classes": 4,
-                    "n_informative": "[SPECIAL_VALUE]0.5"
-                },
-                "algorithm": {
-                    "estimator_params": {
-                        "n_neighbors": 5
-                    }
-                }
-            }
-        },
-        "Synth:1M+100Kx20;k:5": {
-            "data": {
-                "source": "make_classification",
-                "split_kwargs": {
-                    "train_size": 1000000,
-                    "test_size": 100000
-                },
-                "generation_kwargs": {
-                    "n_samples": 1100000,
-                    "n_features": 20,
-                    "n_classes": 100,
-                    "n_informative": "[SPECIAL_VALUE]0.5"
-                },
-                "algorithm": {
-                    "estimator_params": {
-                        "n_neighbors": 5
-                    }
-                }
-            }
-        },
-        "Synth:300+50Mx4;k:12": {
-            "data": {
-                "source": "make_regression",
-                "split_kwargs": {
-                    "train_size": 300,
-                    "test_size": 50000000
-                },
-                "generation_kwargs": {
-                    "n_samples": 50000300,
-                    "n_features": 4,
-                    "noise": 1.25
-                },
-                "algorithm": {
-                    "estimator_params": {
-                        "n_neighbors": 12
-                    }
-                }
-            }
-        },
-        "Synth:500K+5Kx5;k:3": {
-            "data": {
-                "source": "make_regression",
-                "split_kwargs": {
-                    "train_size": 500000,
-                    "test_size": 5000
-                },
-                "generation_kwargs": {
-                    "n_samples": 505000,
-                    "n_features": 5,
-                    "noise": 1.25
-                },
-                "algorithm": {
-                    "estimator_params": {
-                        "n_neighbors": 3
-                    }
-                }
-            }
+        "synthetic regression data": {
+            "data": [
+                { "source": "make_regression", "split_kwargs": { "train_size": 300, "test_size": 50000000 }, "generation_kwargs": {  "n_samples": 50000300, "n_features": 4, "noise": 1.25 },  "algorithm": { "estimator_params": { "n_neighbors": 12 } } },
+                { "source": "make_regression", "split_kwargs": { "train_size": 500000, "test_size": 5000 },  "generation_kwargs": {  "n_samples": 505000,   "n_features": 5, "noise": 1.25 },  "algorithm": { "estimator_params": { "n_neighbors": 3 } } }
+            ]
         }
     },
     "TEMPLATES": {
-        "KnnBFCls Epsilon:100K;k:2": {
-            "INCLUDE": ["implementations", "knncls parameters", "Epsilon:100K;k:2"]
+        "KnnBFCls Real Datasets": {
+            "INCLUDE": ["implementations", "knncls parameters", "real classification datasets"]
         },
-        "KnnBFCls Higgs:150K;k:5": {
-            "INCLUDE": ["implementations", "knncls parameters", "Higgs:150K;k:5"]
+        "KnnBFCls Synthetic Data": {
+            "INCLUDE": ["implementations", "knncls parameters", "synthetic classification data"]
         },
-        "KnnBFCls Hepmass:150K;k:5": {
-            "INCLUDE": ["implementations", "knncls parameters", "Hepmass:150K;k:5"]
+        "KnnBFReg Real Datasets": {
+            "INCLUDE": ["implementations", "knnreg parameters", "real regression datasets"]
         },
-        "KnnBFCls Epsilon:100K;k:100": {
-            "INCLUDE": ["implementations", "knncls parameters", "Epsilon:100K;k:100"]
-        },
-        "KnnBFCls Higgs:150K;k:100": {
-            "INCLUDE": ["implementations", "knncls parameters", "Higgs:150K;k:100"]
-        },
-        "KnnBFCs Hepmass:150K;k:100": {
-            "INCLUDE": ["implementations", "knncls parameters", "Hepmass:150K;k:100"]
-        },
-        "KnnBFCls Gist:150K;k:3": {
-            "INCLUDE": ["implementations", "knncls parameters", "Gist:150K;k:3"]
-        },
-        "KnnBFCls Gist:300K;k:3": {
-            "INCLUDE": ["implementations", "knncls parameters", "Gist:300K;k:3"]
-        },
-        "KnnBFCls Cifar:50K;k:7": {
-            "INCLUDE": ["implementations", "knncls parameters", "Cifar:50K;k:7"]
-        },
-        "KnnBFCls Mnist:60K;k:5": {
-            "INCLUDE": ["implementations", "knncls parameters", "Mnist:60K;k:5"]
-        },
-        "KnnBFCls Synth:500K+500Kx10;k:100": {
-            "INCLUDE": ["implementations", "knncls parameters", "Synth:500K+500Kx10;k:100"]
-        },
-        "KnnBFCls Synth:100K+50Mx20;k:5": {
-            "INCLUDE": ["implementations", "knncls parameters", "Synth:100K+50Mx20;k:5"]
-        },
-        "KnnBFCls Synth:1M+1Mx5;k:5": {
-            "INCLUDE": ["implementations", "knncls parameters", "Synth:1M+1Mx5;k:5"]
-        },
-        "KnnBFCls Synth:1M+100Kx20;k:5": {
-            "INCLUDE": ["implementations", "knncls parameters", "Synth:1M+100Kx20;k:5"]
-        },
-        "KnnBFReg YearMsdTrain:463K;k:2": {
-            "INCLUDE": ["implementations", "knnreg parameters", "YearMsdTrain:463K;k:2"]
-        },
-        "KnnBFReg Higgs:150K;k:5": {
-            "INCLUDE": ["implementations", "knnreg parameters", "Higgs:150K;k:5"]
-        },
-        "KnnBFReg Gist:150K;k:3": {
-            "INCLUDE": ["implementations", "knnreg parameters", "Gist:150K;k:3"]
-        },
-        "KnnBFReg Mnist:60K;k:5": {
-            "INCLUDE": ["implementations", "knnreg parameters", "Cifar:50K;k:7"]
-        },
-        "KnnBFReg Synth:300+50Mx4;k:12": {
-            "INCLUDE": ["implementations", "knnreg parameters", "Synth:300+50Mx4;k:12"]
-        },
-        "KnnBFReg Synth:500K+5Kx5;k:3": {
-            "INCLUDE": ["implementations", "knnreg parameters", "Synth:500K+5Kx5;k:3"]
+        "KnnBFReg Synthetic Data": {
+            "INCLUDE": ["implementations", "knnreg parameters", "synthetic regression data"]
         }
     }
 }

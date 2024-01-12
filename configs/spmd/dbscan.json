@@ -10,216 +10,32 @@
                 "estimator": "DBSCAN"
             }
         },
-		"mnist_10t": {
-			"data": {
-				"dataset": "mnist",
-				"dataset_kwargs": {
-					"train_file": "mnist_test.csv"
-				}
-			},
-			"algorithm": [
-				{
-					"estimator_params": {
-						"eps": 1.7e3,
-						"min_samples": 3
-					}
-				}
+        "real datasets": {
+            "data": [
+                { "dataset": "mnist",        "dataset_kwargs": { "train_file": "mnist_test.csv" },                 "algorithm": { "estimator_params": { "eps": 1.7e3, "min_samples": 3 } } },
+                { "dataset": "hepmass",      "dataset_kwargs": { "train_file": "hepmass_10t_test.csv" },           "algorithm": { "estimator_params": { "eps": 5,     "min_samples": 3 } } },
+                { "dataset": "hepmass",      "dataset_kwargs": { "train_file": "hepmass_50t_test.csv" },           "algorithm": { "estimator_params": { "eps": 5,     "min_samples": 20 } } },
+                { "dataset": "road_network", "dataset_kwargs": { "train_file": "road_network_20t_cluster.csv" },   "algorithm": { "estimator_params": { "eps": 1e3,   "min_samples": 220 } } },
+                { "dataset": "road_network", "dataset_kwargs": { "train_file": "road_network_100t_cluster.csv" },  "algorithm": { "estimator_params": { "eps": 1e3,   "min_samples": 220 } } },
+                { "dataset": "cifar",        "dataset_kwargs": { "train_file": "cifar_50k_train_multiclass.csv" }, "algorithm": { "estimator_params": { "eps": 1e3,   "min_samples": 220 } } }
             ]
         },
-		"hepmass_10t": {
-			"data": {
-				"dataset": "hepmass",
-				"dataset_kwargs": {
-					"train_file": "hepmass_10t_test.csv"
-				}
-			},
-			"algorithm": [
-				{
-					"estimator_params": {
-						"eps": 5,
-						"min_samples": 3
-					}
-				}
+        "synthetic data": {
+            "data": [
+                { "source": "make_blobs", "generation_kwargs": { "n_samples": 400000,   "n_features": 24, "centers": 10 }, "algorithm": { "estimator_params": { "eps": 5, "min_samples": 10 } } },
+                { "source": "make_blobs", "generation_kwargs": { "n_samples": 100000,   "n_features": 50, "centers": 20 }, "algorithm": { "estimator_params": { "eps": 5, "min_samples": [ 20, 30 ] } } },
+                { "source": "make_blobs", "generation_kwargs": { "n_samples": 80000000, "n_features": 28, "centers": 30 }, "algorithm": { "estimator_params": { "eps": 5, "min_samples": 30 } } },
+                { "source": "make_blobs", "generation_kwargs": { "n_samples": 1000000,  "n_features": 40, "centers": 10 }, "algorithm": { "estimator_params": { "eps": 5, "min_samples": 10 } } },
+                { "source": "make_blobs", "generation_kwargs": { "n_samples": 2000000,  "n_features": 20, "centers": 30 }, "algorithm": { "estimator_params": { "eps": 5, "min_samples": 30 } } }
             ]
-        },
-		"hepmass_50t": {
-			"data": {
-				"dataset": "hepmass",
-				"dataset_kwargs": {
-					"train_file": "hepmass_50t_test.csv"
-				}
-			},
-			"algorithm": [
-				{
-					"estimator_params": {
-						"eps": 5,
-						"min_samples": 20
-					}
-				}
-            ]
-        },
-		"road_network_20t": {
-			"data": {
-				"dataset": "road_network",
-				"dataset_kwargs": {
-					"train_file": "road_network_20t_cluster.csv"
-				}
-			},
-			"algorithm": [
-				{
-					"estimator_params": {
-						"eps": 1e3,
-						"min_samples": 220
-					}
-				}
-            ]
-        },
-		"road_network_100t": {
-			"data": {
-				"dataset": "road_network",
-				"dataset_kwargs": {
-					"train_file": "road_network_100t_cluster.csv"
-				}
-			},
-			"algorithm": [
-				{
-					"estimator_params": {
-						"eps": 1e3,
-						"min_samples": 220
-					}
-				}
-            ]
-        },
-		"cifar_50t": {
-			"data": {
-				"dataset": "cifar",
-				"dataset_kwargs": {
-					"train_file": "cifar_50k_train_multiclass.csv"
-				}
-			},
-			"algorithm": [
-				{
-					"estimator_params": {
-						"eps": 1e3,
-						"min_samples": 220
-					}
-				}
-            ]
-        },
-        "Synthetic:400Kx24": {
-            "data": {
-                "source": "make_blobs",
-                "generation_kwargs": {
-                    "n_samples": 400000,
-                    "n_features": 24,
-                    "centers": 10
-                }
-            },
-			"algorithm": {
-				"estimator_params": {
-					"eps": 5,
-					"min_samples": 10
-				}
-			}
-        },
-        "Synthetic:100Kx50": {
-            "data": {
-                "source": "make_blobs",
-                "generation_kwargs": {
-                    "n_samples": 100000,
-                    "n_features": 50,
-                    "centers": 20
-                }
-            },
-			"algorithm": {
-				"estimator_params": {
-					"eps": 5,
-					"min_samples": [20, 30]
-				}
-			}
-        },
-        "Synthetic:80Mx28": {
-            "data": {
-                "source": "make_blobs",
-                "generation_kwargs": {
-                    "n_samples": 80000000,
-                    "n_features": 28,
-                    "centers": 30
-                }
-            },
-			"algorithm": {
-				"estimator_params": {
-					"eps": 5,
-					"min_samples": 30
-				}
-			}
-        },
-        "Synthetic:1Mx40": {
-            "data": {
-                "source": "make_blobs",
-                "generation_kwargs": {
-                    "n_samples": 1000000,
-                    "n_features": 40,
-                    "centers": 10
-                }
-            },
-			"algorithm": {
-				"estimator_params": {
-					"eps": 5,
-					"min_samples": 10
-				}
-			}
-        },
-        "Synthetic:2Mx20": {
-            "data": {
-                "source": "make_blobs",
-                "generation_kwargs": {
-                    "n_samples": 2000000,
-                    "n_features": 20,
-                    "centers": 30
-                }
-            },
-			"algorithm": {
-				"estimator_params": {
-					"eps": 5,
-					"min_samples": 30
-				}
-			}
         }
 	},
     "TEMPLATES": {
-        "DBSCAN mnist_10t": {
-            "INCLUDE": ["implementations", "dbscan parameters", "mnist_10t"]
+        "DBSCAN Real Datasets": {
+            "INCLUDE": ["implementations", "dbscan parameters", "real datasets"]
         },
-        "DBSCAN hepmass_10t": {
-            "INCLUDE": ["implementations", "dbscan parameters", "hepmass_10t"]
-        },
-        "DBSCAN hepmass_50t": {
-            "INCLUDE": ["implementations", "dbscan parameters", "hepmass_50t"]
-        },
-        "DBSCAN road_network_20t": {
-            "INCLUDE": ["implementations", "dbscan parameters", "road_network_20t"]
-        },
-        "DBSCAN road_network_100t": {
-            "INCLUDE": ["implementations", "dbscan parameters", "road_network_100t"]
-        },
-        "DBSCAN cifar_50t": {
-            "INCLUDE": ["implementations", "dbscan parameters", "cifar_50t"]
-        },
-        "DBSCAN Synthetic:400Kx24": {
-            "INCLUDE": ["implementations", "dbscan parameters", "Synthetic:400Kx24"]
-        },
-        "DBSCAN Synthetic:100Kx50": {
-            "INCLUDE": ["implementations", "dbscan parameters", "Synthetic:100Kx50"]
-        },
-        "DBSCAN Synthetic:80Mx28": {
-            "INCLUDE": ["implementations", "dbscan parameters", "Synthetic:80Mx28"]
-        },
-        "DBSCAN Synthetic:1Mx40": {
-            "INCLUDE": ["implementations", "dbscan parameters", "Synthetic:1Mx40"]
-        },
-        "DBSCAN Synthetic:2Mx20": {
-            "INCLUDE": ["implementations", "dbscan parameters", "Synthetic:2Mx20"]
+        "DBSCAN Synthetic Data": {
+            "INCLUDE": ["implementations", "dbscan parameters", "synthetic data"]
         }
     }
 }
