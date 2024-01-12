@@ -309,7 +309,6 @@ def main(bench_case: BenchCase, filters: List[BenchCase]):
                 result.update(data_descs[stage])
                 result.update(metrics[method])
         results.append(result)
-        logger.warning(results)
     return results
 
 

@@ -102,7 +102,7 @@ def run_benchmark_from_case(
     bench_case: BenchCase, filters: List[BenchCase], log_level: str
 ) -> Tuple[int, List[Dict]]:
     command = generate_benchmark_command(bench_case, filters, log_level)
-    logger.warning(f"Benchmark wrapper call command: {command}")
+    logger.debug(f"Benchmark wrapper call command: {command}")
     return_code, stdout, stderr = read_output_from_command(command)
 
     if stdout != "":
