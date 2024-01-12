@@ -83,22 +83,6 @@ def get_subset_metrics_of_estimator(
                 "balanced accuracy": float(balanced_accuracy_score(dpt.to_numpy(y), dpt.to_numpy(y_pred))),
             }
         )
-        # if hasattr(estimator_instance, "predict_proba"):
-        #     y_pred_proba = estimator_instance.predict_proba(x)
-        #     metrics.update(
-        #         {
-        #             "ROC AUC": float(
-        #                 roc_auc_score(
-        #                     dpt.to_numpy(y),
-        #                     dpt.to_numpy(y_pred_proba)
-        #                     if y_pred_proba.shape[1] > 2
-        #                     else y_pred_proba[:, 1],
-        #                     multi_class="ovr",
-        #                 )
-        #             ),
-        #             "logloss": float(log_loss(y, y_pred_proba)),
-        #         }
-        #     )
     elif task == "regression":
         y_pred = estimator_instance.predict(x)
         metrics.update(
