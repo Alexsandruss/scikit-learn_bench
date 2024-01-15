@@ -78,11 +78,13 @@ def generate_benchmark_command(
                 size = comm.Get_size()
                 mpi_n = get_bench_case_value(bench_case, "algorithm:num_procs")
                 if mpi_n is not None:
-                    mpi_ppn = get_bench_case_value(bench_case, "algorithm:procs_per_node") or mpi_n
+                    mpi_ppn = get_bench_case_value(bench_case, "algorithm:procs_per_node")
                 else:
-                    raise ValueError("Specify n for distributed mode")
+                    raise ValueError("Specify num_procs for distributed device mode")
                 benchmark_name = "distr_sklearn_estimator"
-                command_prefix = f"{command_prefix}mpirun -n {mpi_n} -ppn {mpi_ppn} "
+                command_prefix = f"{command_prefix}mpirun -n {mpi_n} "
+                if mpi_ppn is not None:
+                    command_prefix = f"{command_prefix}-ppn {mpi_ppn} "
             except ModuleNotFoundError as e:
                 raise ModuleNotFoundError("mpi4py required for distributed benchmarking.")
     elif get_bench_case_value(bench_case, "algorithm:function") is not None:

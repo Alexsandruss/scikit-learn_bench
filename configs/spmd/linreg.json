@@ -23,7 +23,7 @@
                 { "source": "make_regression", "generation_kwargs": { "n_samples": 2000500,  "n_features": 10, "noise": 1.25 }, "split_kwargs": { "train_size": 2000000, "test_size": 500 } },
                 { "source": "make_regression", "generation_kwargs": { "n_samples": 205000,   "n_features": 6,  "noise": 1.25 }, "split_kwargs": { "train_size": 200000,  "test_size": 5000 } },
                 { "source": "make_regression", "generation_kwargs": { "n_samples": 101000,   "n_features": 20, "noise": 1.25 }, "split_kwargs": { "train_size": 100000,  "test_size": 1000 } },
-                { "source": "make_regression", "generation_kwargs": { "n_samples": 50000300, "n_features": 4,  "noise": 1.25 }, "split_kwargs": { "train_size": 500,     "test_size": 50000000 } },
+                { "source": "make_regression", "generation_kwargs": { "n_samples": 50000300, "n_features": 4,  "noise": 1.25 }, "split_kwargs": { "train_size": 300,     "test_size": 50000000 } },
                 { "source": "make_regression", "generation_kwargs": { "n_samples": 505000,   "n_features": 5,  "noise": 1.25 }, "split_kwargs": { "train_size": 500000,  "test_size": 5000 } }
             ]
         }

@@ -36,6 +36,8 @@ Formatting example:
 | `data`:`cache_directory` | `data_cache` |  | Directory path to store cached datasets for fast loading. |
 | `data`:`raw_cache_directory` | `data`:`cache_directory` + "raw" |  | Directory path to store downloaded raw datasets. |
 | `data`:`dataset` | None |  | Name of dataset to use from implemented dataset loaders. |
+| `data`:`dataset:dataset_kwargs:train_file` | None |  | Name of specific CSV file to be loaded for training/compute. |
+| `data`:`dataset:dataset_kwargs:test_file` | None |  | Name of specific CSV file to be loaded for testing. |
 | `data`:`source` | None | `fetch_openml`, `make_regression`, `make_classification`, `make_blobs` | Data source to use for loading or synthetic generation. |
 | `data`:`id` | None |  | OpenML data id for `fetch_openml` source. |
 | `data`:`preprocessing_kwargs`:`replace_nan` | `median` | `median`, `mean` | Value to replace NaNs in preprocessed data. |
@@ -47,7 +49,7 @@ Formatting example:
 | `data`:`order` | `F` | `C`, `F` | Data order to use in benchmark: contiguous(C) or Fortran. |
 | `data`:`dtype` | `float64` |  | Data type to use in benchmark. |
 | `algorithm`:`library` | None |  | Python module containing measured entity (class or function). |
-| `algorithm`:`device` | `default` | `default`, `cpu`, `gpu` | Selected device for computation. |
+| `algorithm`:`device` | `default` | `default`, `cpu`, `gpu`, `distributed` | Selected device for computation. |
 
 ## Benchmark-specific parameters
 
@@ -61,6 +63,15 @@ Formatting example:
 | `algorithm`:`sklearn_context` | None |  | Parameters for sklearn's config_context used over estimator. |
 | `algorithm`:`sklearnex_context` | None |  | Parameters for sklearnex's config_context used over estimator. Updated by `sklearn_context` if set. |
 | `bench`:`ensure_sklearnex_patching` | True |  | If True, warns about sklearnex patching failures. |
+
+### `distr_sklearn_estimator`
+
+| Parameter keys | Default value | Choices | Description |
+|:---------------|:--------------|:--------|:------------|
+| `algorithm`:`estimator` | None |  | Name of measured estimator. |
+| `algorithm`:`estimator_params` | Empty `dict` |  | Parameters for estimator constructor. |
+| `algorithm`:`num_procs` | None | Any integer less than or equal to number of GPUs available | Number of GPUs to use in distributed benchmarking. |
+| `algorithm`:`procs_per_node` | `num_procs` |  | GPUs per node to utilize for distributed benchmarking. |
 
 ### `custom_function`
 
