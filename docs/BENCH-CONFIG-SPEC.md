@@ -71,7 +71,7 @@ Formatting example:
 | `algorithm`:`estimator` | None |  | Name of measured estimator. |
 | `algorithm`:`estimator_params` | Empty `dict` |  | Parameters for estimator constructor. |
 | `algorithm`:`num_procs` | None | Any integer less than or equal to number of GPUs available | Number of GPUs to use in distributed benchmarking. |
-| `algorithm`:`procs_per_node` | `num_procs` |  | GPUs per node to utilize for distributed benchmarking. |
+| `algorithm`:`procs_per_node` | None |  | GPUs per node to utilize for distributed benchmarking. |
 
 ### `custom_function`
 
