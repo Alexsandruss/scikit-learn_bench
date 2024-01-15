@@ -36,8 +36,8 @@ Formatting example:
 | `data`:`cache_directory` | `data_cache` |  | Directory path to store cached datasets for fast loading. |
 | `data`:`raw_cache_directory` | `data`:`cache_directory` + "raw" |  | Directory path to store downloaded raw datasets. |
 | `data`:`dataset` | None |  | Name of dataset to use from implemented dataset loaders. |
-| `data`:`dataset:dataset_kwargs:train_file` | None |  | Name of specific CSV file to be loaded for training/compute. |
-| `data`:`dataset:dataset_kwargs:test_file` | None |  | Name of specific CSV file to be loaded for testing. |
+| `data`:`dataset_kwargs`:`train_file` | None |  | Name of specific CSV file to be loaded for training/compute. |
+| `data`:`dataset_kwargs`:`test_file` | None |  | Name of specific CSV file to be loaded for testing. |
 | `data`:`source` | None | `fetch_openml`, `make_regression`, `make_classification`, `make_blobs` | Data source to use for loading or synthetic generation. |
 | `data`:`id` | None |  | OpenML data id for `fetch_openml` source. |
 | `data`:`preprocessing_kwargs`:`replace_nan` | `median` | `median`, `mean` | Value to replace NaNs in preprocessed data. |
