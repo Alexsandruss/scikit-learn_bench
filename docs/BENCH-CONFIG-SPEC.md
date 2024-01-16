@@ -73,6 +73,7 @@ Formatting example:
 | `algorithm`:`num_procs` | None | Any integer less than or equal to number of GPUs available | Number of GPUs to use in distributed benchmarking. |
 | `algorithm`:`procs_per_node` | None |  | GPUs per node to utilize for distributed benchmarking. |
 | `algorithm`:`host_addresses` | None |  | Comma-separated list of host addresses for available nodes to be utilized for distributed benchmarking. |
+| `data`:`weak_scaling` | None |  | Set to enable weak-scaling. Can set to anything but use 1 for uniformity. |
 
 ### `custom_function`
 

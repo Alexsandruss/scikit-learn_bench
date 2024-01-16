@@ -219,22 +219,33 @@ def main(bench_case: BenchCase, filters: List[BenchCase]):
     (x_train, x_test, y_train, y_test), data_description = split_and_transform_data(
         bench_case, data, data_description
     )
-    
-    train_rows = x_train.shape[0]
-    test_rows = x_test.shape[0]
-    comm = MPI.COMM_WORLD
-    rank = comm.Get_rank()
-    size = comm.Get_size()
-    train_start = rank * train_rows // size
-    train_end = (1 + rank) * train_rows // size
-    test_start = rank * test_rows // size
-    test_end = (1 + rank) * test_rows // size
 
-    x_train = dpt.asarray(x_train[train_start:train_end], usm_type="device", sycl_queue=q)
-    x_test = dpt.asarray(x_test[test_start:test_end], usm_type="device", sycl_queue=q)
-    if y_train is not None:
-        y_train = dpt.asarray(y_train[train_start:train_end], usm_type="device", sycl_queue=q)
-        y_test = dpt.asarray(y_test[test_start:test_end], usm_type="device", sycl_queue=q)
+    # get estimator parameters
+    weak_scaling = get_bench_case_value(bench_case, "data:weak_scaling", None)
+    
+    if weak_scaling is None:
+        train_rows = x_train.shape[0]
+        test_rows = x_test.shape[0]
+        comm = MPI.COMM_WORLD
+        rank = comm.Get_rank()
+        size = comm.Get_size()
+        train_start = rank * train_rows // size
+        train_end = (1 + rank) * train_rows // size
+        test_start = rank * test_rows // size
+        test_end = (1 + rank) * test_rows // size
+
+        x_train = dpt.asarray(x_train[train_start:train_end], usm_type="device", sycl_queue=q)
+        x_test = dpt.asarray(x_test[test_start:test_end], usm_type="device", sycl_queue=q)
+        if y_train is not None:
+            y_train = dpt.asarray(y_train[train_start:train_end], usm_type="device", sycl_queue=q)
+            y_test = dpt.asarray(y_test[test_start:test_end], usm_type="device", sycl_queue=q)
+    else:
+        x_train = dpt.asarray(x_train, usm_type="device", sycl_queue=q)
+        x_test = dpt.asarray(x_test, usm_type="device", sycl_queue=q)
+        if y_train is not None:
+            y_train = dpt.asarray(y_train, usm_type="device", sycl_queue=q)
+            y_test = dpt.asarray(y_test, usm_type="device", sycl_queue=q)
+
 
     # assign special values
     assign_case_special_values_on_run(
@@ -276,7 +287,6 @@ def main(bench_case: BenchCase, filters: List[BenchCase]):
         "num_procs": get_bench_case_value(bench_case, "algorithm:num_procs"),
         "procs_per_node": get_bench_case_value(bench_case, "algorithm:procs_per_node"),
     }
-    # TODO: replace get_params with algorithm estimator_params
 
     data_descs = {
         "training": data_description["x_train"],
