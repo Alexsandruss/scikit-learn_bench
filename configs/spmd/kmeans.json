@@ -11,7 +11,10 @@
                 "estimator_params": {
                     "algorithm": "lloyd"
                 }
-            }
+            },
+			"data": {
+				"dtype": ["float32", "float64"]
+			}
         },
         "real datasets": {
             "data": [

@@ -9,7 +9,10 @@
             "algorithm": {
                 "estimator": "BasicStatistics",
                 "estimator_methods": { "inference": "compute" }
-            }
+            },
+			"data": {
+				"dtype": ["float32", "float64"]
+			}
         },
         "real datasets": {
             "data": [

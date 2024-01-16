@@ -9,13 +9,19 @@
             "algorithm": {
                 "estimator": "RandomForestClassifier",
                 "estimator_params": { "criterion": "gini", "max_features": "sqrt" }
-            }
+            },
+			"data": {
+				"dtype": ["float32", "float64"]
+			}
         },
         "rfreg parameters": {
             "algorithm": {
                 "estimator": "RandomForestRegressor",
                 "estimator_params": { "criterion": "squared_error", "max_features": 1.0 }
-            }
+            },
+			"data": {
+				"dtype": ["float32", "float64"]
+			}
         },
         "real classification datasets": {
             "data": [

@@ -9,7 +9,10 @@
             "algorithm": {
                 "estimator": "PCA",
                 "estimator_methods": { "training": "fit" }
-            }
+            },
+			"data": {
+				"dtype": ["float32", "float64"]
+			}
         },
         "real datasets": {
             "data": [

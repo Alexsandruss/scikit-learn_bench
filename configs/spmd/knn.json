@@ -11,7 +11,10 @@
                 "estimator_params": {
                     "algorithm": "brute"
                 }
-            }
+            },
+			"data": {
+				"dtype": ["float32", "float64"]
+			}
         },
         "knnreg parameters": {
             "algorithm": {
@@ -19,7 +22,10 @@
                 "estimator_params": {
                     "algorithm": "brute"
                 }
-            }
+            },
+			"data": {
+				"dtype": ["float32", "float64"]
+			}
         },
         "real classification datasets": {
             "data": [

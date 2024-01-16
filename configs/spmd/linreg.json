@@ -8,7 +8,10 @@
         "linear parameters": {
             "algorithm": {
                 "estimator": "LinearRegression"
-            }
+            },
+			"data": {
+				"dtype": ["float32", "float64"]
+			}
         },
         "real datasets": {
             "data": [

@@ -8,7 +8,10 @@
         "dbscan parameters": {
             "algorithm": {
                 "estimator": "DBSCAN"
-            }
+            },
+			"data": {
+				"dtype": ["float32", "float64"]
+			}
         },
         "real datasets": {
             "data": [
