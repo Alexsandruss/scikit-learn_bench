@@ -85,6 +85,9 @@ def generate_benchmark_command(
                 command_prefix = f"{command_prefix}mpirun -n {mpi_n} "
                 if mpi_ppn is not None:
                     command_prefix = f"{command_prefix}-ppn {mpi_ppn} "
+                host_addrs = get_bench_case_value(bench_case, "algorithm:host_addresses")
+                if host_addrs is not None:
+                    command_prefix = f"{command_prefix}-hosts {host_addrs} "
             except ModuleNotFoundError as e:
                 raise ModuleNotFoundError("mpi4py required for distributed benchmarking.")
     elif get_bench_case_value(bench_case, "algorithm:function") is not None:

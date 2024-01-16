@@ -79,6 +79,8 @@ COLUMNS_ORDER = [
     "function",
     "online_inference_mode",
     "device",
+    "num_procs",
+    "procs_per_node",
     "environment_hash",
     # data
     "dataset",

@@ -273,6 +273,8 @@ def main(bench_case: BenchCase, filters: List[BenchCase]):
         "library": library_name,
         "estimator": estimator_name,
         "device": get_bench_case_value(bench_case, "algorithm:device"),
+        "num_procs": get_bench_case_value(bench_case, "algorithm:num_procs"),
+        "procs_per_node": get_bench_case_value(bench_case, "algorithm:procs_per_node"),
     }
     # TODO: replace get_params with algorithm estimator_params
 
