@@ -34,7 +34,7 @@
             "INCLUDE": ["implementations", "pca parameters", "real datasets"]
         },
         "PCA Synthetic Data": {
-            "INCLUDE": ["implementations", "pca parameters", "real datasets"]
+            "INCLUDE": ["implementations", "pca parameters", "synthetic data"]
         }
     }
 }
