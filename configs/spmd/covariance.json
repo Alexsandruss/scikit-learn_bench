@@ -1,0 +1,44 @@
+{
+    "PARAMETERS_SETS": {
+        "implementations": {
+            "algorithm": [
+                { "library": "sklearnex", "device": "distributed", "num_procs": 2, "procs_per_node": 2 }
+            ]
+        },
+        "covariance parameters": {
+            "algorithm": {
+                "estimator": "EmpiricalCovariance"
+            },
+			"data": {
+				"dtype": ["float32", "float64"]
+			}
+        },
+        "real datasets": {
+            "data": [
+                { "dataset": "higgs",   "dataset_kwargs": { "train_file": ["higgs_1m_train.csv", "higgs_2m_train.csv"] } },
+                { "dataset": "epsilon", "dataset_kwargs": { "train_file": ["epsilon_30k_train.csv", "epsilon_80k_train.csv"] } },
+                { "dataset": "gist",    "dataset_kwargs": { "train_file": ["gist_200k.csv", "gist_500k.csv"] } },
+                { "dataset": "cifar",   "dataset_kwargs": { "train_file": "cifar_50k_train_binary.csv" } }
+            ]
+        },
+        "synthetic data": {
+            "data": [
+                { "source": "make_blobs", "generation_kwargs": { "n_samples": 300000000, "n_features": 10, "centers": 1 } },
+                { "source": "make_blobs", "generation_kwargs": { "n_samples": 10000000, "n_features": 900, "centers": 1 } },
+                { "source": "make_blobs", "generation_kwargs": { "n_samples": 50000, "n_features": 50, "centers": 1 } },
+                { "source": "make_blobs", "generation_kwargs": { "n_samples": 100000, "n_features": 38000, "centers": 1 } },
+                { "source": "make_blobs", "generation_kwargs": { "n_samples": 100000, "n_features": 100000, "centers": 1 } },
+                { "source": "make_blobs", "generation_kwargs": { "n_samples": 690000, "n_features": 2220, "centers": 1 } },
+                { "source": "make_blobs", "generation_kwargs": { "n_samples": 6000, "n_features": 600, "centers": 1 } }
+            ]
+        }
+    },
+    "TEMPLATES": {
+        "Covariance Real Datasets": {
+            "INCLUDE": ["implementations", "covariance parameters", "real datasets"]
+        },
+        "Covariance Synthetic Data": {
+            "INCLUDE": ["implementations", "covariance parameters", "synthetic data"]
+        }
+    }
+}
