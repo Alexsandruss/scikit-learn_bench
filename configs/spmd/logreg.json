@@ -25,11 +25,11 @@
                 { "dataset": "gist",    "dataset_kwargs": { "train_file": "gist_200k.csv",              "test_file": "gist_100k.csv",             "n_classes": 2 }, "algorithm": { "estimator_params": { "max_iter": 20 } } },
                 { "dataset": "susy",    "dataset_kwargs": { "train_file": "susy_train.csv",             "test_file": "susy_test.csv",             "n_classes": 2 }, "algorithm": { "estimator_params": { "max_iter": [10, 20] } } }
             ]
-        },
-        "TEMPLATES": {
-            "LogReg Real Datasets": {
-                "INCLUDE": ["implementations", "logreg parameters", "real datasets"]
-            }
+        }
+    },
+    "TEMPLATES": {
+        "LogReg Real Datasets": {
+            "INCLUDE": ["implementations", "logreg parameters", "real datasets"]
         }
     }
 }
