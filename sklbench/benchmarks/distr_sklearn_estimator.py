@@ -117,9 +117,9 @@ def get_subset_metrics_of_estimator(
             y_pred = estimator_instance.predict(x)
             metrics.update(
                 {
-                    "Davies-Bouldin score": float(davies_bouldin_score(x, y_pred)),
-                    "homogeneity": float(homogeneity_score(y, y_pred)),
-                    "completeness": float(completeness_score(y, y_pred)),
+                    "Davies-Bouldin score": float(davies_bouldin_score(dpt.to_numpy(x), dpt.to_numpy(y_pred))),
+                    "homogeneity": float(homogeneity_score(dpt.to_numpy(y), dpt.to_numpy(y_pred))),
+                    "completeness": float(completeness_score(dpt.to_numpy(y), dpt.to_numpy(y_pred))),
                 }
             )
         if "DBSCAN" in str(estimator_instance) and stage == "training" and y is not None:
