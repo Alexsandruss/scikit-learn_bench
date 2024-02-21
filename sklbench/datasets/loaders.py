@@ -775,14 +775,14 @@ def load_from_datasetsroot(
     if os.path.exists(dataset_root + dataset_params.get("train_file")):
         train_df = pd.read_csv(dataset_root + dataset_params.get("train_file"))
         x_train = train_df.iloc[:, :-1].to_numpy(dtype=np.float32)
-        y_train = train_df.iloc[:, -1].to_numpy(dtype=np.float32).reshape((-1, 1))
+        y_train = train_df.iloc[:, -1].to_numpy(dtype=np.float32).ravel()
         
         if dataset_params.get("test_file"):
             test_df = pd.read_csv(dataset_root + dataset_params.get("test_file"))
             x_test = test_df.iloc[:, :-1].to_numpy(dtype=np.float32)
-            y_test = test_df.iloc[:, -1].to_numpy(dtype=np.float32).reshape((-1, 1))
+            y_test = test_df.iloc[:, -1].to_numpy(dtype=np.float32).ravel()
             x = np.vstack([x_train, x_test])
-            y = np.vstack([y_train, y_test])
+            y = np.concatenate([y_train, y_test])
             data_desc = {"default_split": { "train_size": y_train.shape[0], "test_size": y_test.shape[0], "shuffle": False}}
         else:
             x = np.vstack([x_train])
