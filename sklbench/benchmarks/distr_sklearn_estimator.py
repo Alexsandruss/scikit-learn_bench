@@ -113,43 +113,6 @@ def get_subset_metrics_of_estimator(
                     )
                 }
             )
-        if hasattr(estimator_instance, "predict"):
-            y_pred = estimator_instance.predict(x)
-            metrics.update(
-                {
-                    "Davies-Bouldin score": float(davies_bouldin_score(dpt.to_numpy(x), dpt.to_numpy(y_pred))),
-                    "homogeneity": float(homogeneity_score(dpt.to_numpy(y), dpt.to_numpy(y_pred))),
-                    "completeness": float(completeness_score(dpt.to_numpy(y), dpt.to_numpy(y_pred))),
-                }
-            )
-        if "DBSCAN" in str(estimator_instance) and stage == "training" and y is not None:
-            clusters = len(
-                np.unique(estimator_instance.labels_[estimator_instance.labels_ != -1])
-            )
-            metrics.update({"clusters": clusters})
-            if clusters > 1:
-                metrics.update(
-                    {
-                        "Davies-Bouldin score": float(
-                            davies_bouldin_score(x, estimator_instance.labels_)
-                        )
-                    }
-                )
-            if len(np.unique(y)) < 128:
-                metrics.update(
-                    {
-                        "homogeneity": float(
-                            homogeneity_score(y, estimator_instance.labels_)
-                        )
-                        if clusters > 1
-                        else 0,
-                        "completeness": float(
-                            completeness_score(y, estimator_instance.labels_)
-                        )
-                        if clusters > 1
-                        else 0,
-                    }
-                )
     return metrics
 
 
