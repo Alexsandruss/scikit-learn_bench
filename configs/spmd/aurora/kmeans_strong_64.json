@@ -1,0 +1,33 @@
+{
+    "PARAMETERS_SETS": {
+        "implementations": {
+            "algorithm": [
+                { "library": "sklearnex", "device": "distributed", "num_procs": [1,2,6,12,24,48,96,192,384,768], "procs_per_node": 12 }
+            ]
+        },
+        "kmeans parameters": {
+            "algorithm": {
+                "estimator": "KMeans",
+                "estimator_params": {
+                    "algorithm": "lloyd"
+                },
+		"estimator_methods": { "training": "fit" }
+            },
+			"data": {
+				"dtype": ["float64"]
+			}
+        },
+	"synthetic data": {
+		"data": [
+			{ "source": "make_blobs", "generation_kwargs": { "n_samples": 400000,  "n_features": 1000, "centers": 10 }, "algorithm": { "n_clusters": 10, "max_iter": 10 } },
+			{ "source": "make_blobs", "generation_kwargs": { "n_samples": 40000000,  "n_features": 10, "centers": 10 }, "algorithm": { "n_clusters": 10, "max_iter": 10 } },
+                        { "source": "make_blobs", "generation_kwargs": { "n_samples": 10000000,  "n_features": 10, "centers": 100 }, "algorithm": { "n_clusters": 100, "max_iter": 50 } }
+		]
+	}
+    },
+    "TEMPLATES": {
+        "KMeans Synthetic Data": {
+            "INCLUDE": ["implementations", "kmeans parameters", "synthetic data"]
+        }
+    }
+}

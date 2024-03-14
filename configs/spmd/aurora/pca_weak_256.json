@@ -1,0 +1,43 @@
+{
+    "PARAMETERS_SETS": {
+        "implementations": {
+            "algorithm": [
+                { "library": "sklearnex", "device": "distributed", "num_procs": [1,2,6,12,24,48,192,768,3072], "procs_per_node": 12 }
+            ]
+        },
+        "pca parameters": {
+            "algorithm": {
+                "estimator": "PCA",
+                "estimator_methods": { "training": "fit" }
+            },
+			"data": {
+				"dtype": ["float64"],
+				"weak_scaling": 1
+			}
+        },
+        "real datasets": {
+            "data": [
+		{ "dataset": "susy", "dataset_kwargs": { "train_file": "susy_train.csv" } } ,
+                { "dataset": "higgs", "dataset_kwargs": { "train_file": "higgs_1m_train.csv" } },
+                { "dataset": "epsilon", "dataset_kwargs": { "train_file": "epsilon_30k_train.csv" } }
+            ],
+            "algorithm": { "estimator_params": { "n_components": 1 } }
+        },
+        "synthetic data": {
+            "data": [
+                { "source": "make_blobs", "generation_kwargs": { "n_samples": 100000, "n_features": 1000, "centers": 1 } },
+                { "source": "make_blobs", "generation_kwargs": { "n_samples": 10000000, "n_features": 10, "centers": 1 } }
+            ],
+            "algorithm": { "estimator_params": { "n_components": 1 } }
+        }
+    },
+    "TEMPLATES": {
+        "PCA Real Datasets": {
+            "INCLUDE": ["implementations", "pca parameters", "real datasets"]
+        },
+        "PCA Synthetic Data": {
+            "INCLUDE": ["implementations", "pca parameters", "synthetic data"]
+        }
+
+    }
+}

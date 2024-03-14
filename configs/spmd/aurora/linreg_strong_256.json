@@ -1,0 +1,37 @@
+{
+    "PARAMETERS_SETS": {
+        "implementations": {
+            "algorithm": [
+                { "library": "sklearnex", "device": "distributed", "num_procs": [1,2,6,12,24,48,96,192,384,768,1536,3072], "procs_per_node": 12 }
+            ]
+        },
+        "linear parameters": {
+            "algorithm": {
+                "estimator": "LinearRegression",
+		"estimator_methods": { "training": "fit" }
+            },
+			"data": {
+				"dtype": ["float64"]
+			}
+        },
+        "real datasets": {
+            "data": [
+                { "dataset": "higgs",               "dataset_kwargs": { "train_file": "higgs_10500t_train.csv",        "test_file": "higgs_500t_test.csv" } }
+            ]
+        },
+        "synthetic data": {
+            "data": [
+                { "source": "make_regression", "generation_kwargs": { "n_samples": 255000,  "n_features": 10000, "noise": 1.25 }, "split_kwargs": { "train_size": 250000, "test_size": 5000 } },
+		{ "source": "make_regression", "generation_kwargs": { "n_samples": 250005000,  "n_features": 10, "noise": 1.25 }, "split_kwargs": { "train_size": 250000000, "test_size": 5000 } }
+            ]
+        }
+    },
+    "TEMPLATES": {
+        "LinReg Real Datasets": {
+            "INCLUDE": ["implementations", "linear parameters", "real datasets"]
+        },
+	"Linreg Synthetic Data": {
+ 	    "INCLUDE": ["implementations", "linear parameters", "synthetic data"]
+	}
+    }
+}

@@ -1,0 +1,61 @@
+{
+    "PARAMETERS_SETS": {
+        "implementations": {
+            "algorithm": [
+                { "library": "sklearnex", "device": "distributed", "num_procs": [1,2,6,12,24,48,96,192,384,768], "procs_per_node": 12 }
+            ]
+        },
+        "rfcls parameters": {
+            "algorithm": {
+                "estimator": "RandomForestClassifier",
+                "estimator_params": { "criterion": "gini", "max_features": "sqrt" },
+		"estimator_methods": { "training": "fit" }
+            },
+			"data": {
+				"dtype": ["float64"]
+			}
+        },
+        "rfreg parameters": {
+            "algorithm": {
+                "estimator": "RandomForestRegressor",
+                "estimator_params": { "criterion": "squared_error", "max_features": 1.0 }
+            },
+			"data": {
+				"dtype": ["float32"]
+			}
+        },
+        "real classification datasets": {
+            "data": [
+                { "dataset": "susy",    "dataset_kwargs": { "train_file": "susy_train.csv",         "test_file": "susy_test.csv",        "n_classes": 2 },  "algorithm": { "estimator_params": { "n_estimators": 10, "max_depth": 5 } } },
+                { "dataset": "susy",    "dataset_kwargs": { "train_file": "susy_train.csv",         "test_file": "susy_test.csv",        "n_classes": 2 },  "algorithm": { "estimator_params": { "n_estimators": 20, "max_depth": 16 } } },
+                { "dataset": "hepmass", "dataset_kwargs": { "train_file": "hepmass_100t_train.csv", "test_file": "hepmass_50t_test.csv", "n_classes": 2 },  "algorithm": { "estimator_params": { "n_estimators": 50, "max_depth": 15 } } }
+            ]
+        },
+        "real regression datasets": {
+            "data": [
+                { "dataset": "year_prediction_msd", "dataset_kwargs": { "train_file": "year_prediction_msd_train.csv", "test_file": "year_prediction_msd_test.csv" }, "algorithm": { "estimator_params": { "n_estimators": 10, "max_depth": 5 } } },
+                { "dataset": "year_prediction_msd", "dataset_kwargs": { "train_file": "year_prediction_msd_train.csv", "test_file": "year_prediction_msd_test.csv" }, "algorithm": { "estimator_params": { "n_estimators": 20, "max_depth": 8 } } },
+                { "dataset": "hepmass",             "dataset_kwargs": { "train_file": "hepmass_100t_train.csv",        "test_file": "hepmass_50t_test.csv" },         "algorithm": { "estimator_params": { "n_estimators": 15, "max_depth": 8 } } },
+                { "dataset": "gist",                "dataset_kwargs": { "train_file": "gist_100k.csv",                 "test_file": "gist_50k.csv" },                 "algorithm": { "estimator_params": { "n_estimators": 20, "max_depth": 8 } } }
+            ]
+        },
+        "synthetic classification data": {
+            "data": [
+		{ "source": "make_classification", "split_kwargs": { "train_size": 500000, "test_size": 1000 },    "generation_kwargs": {  "n_samples": 501000, "n_features": 10, "n_classes": 2 },  "algorithm": { "estimator_params": { "n_estimators": 20, "max_depth": 10 } } },
+		{ "source": "make_classification", "split_kwargs": { "train_size": 10000, "test_size": 1000 },    "generation_kwargs": {  "n_samples": 11000, "n_features": 1000, "n_classes": 2 },  "algorithm": { "estimator_params": { "n_estimators": 20, "max_depth": 10 } } }
+	    ]
+	},
+        "synthetic regression data": {
+            "data": [
+                { "source": "make_regression", "split_kwargs": { "train_size": 100000, "test_size": 100 },    "generation_kwargs": {  "n_samples": 100100, "n_features": 10, "noise": 1.25 },  "algorithm": { "estimator_params": { "n_estimators": 30, "max_depth": 15 } } },
+                { "source": "make_regression", "split_kwargs": { "train_size": 100000,     "test_size": 100 }, "generation_kwargs": {  "n_samples": 100100, "n_features": 10 },  "algorithm": { "estimator_params": { "n_estimators": 10, "max_depth": 5 } } },
+                { "source": "make_regression", "split_kwargs": { "train_size": 10000, "test_size": 100 },    "generation_kwargs": {  "n_samples": 10100, "n_features": 100 },  "algorithm": { "estimator_params": { "n_estimators": 10, "max_depth": 5 } } }
+            ]
+        }
+    },
+    "TEMPLATES": {
+        "ForestCls Real Datasets": {
+            "INCLUDE": ["implementations", "rfcls parameters", "synthetic classification data"]
+        }
+    }
+}

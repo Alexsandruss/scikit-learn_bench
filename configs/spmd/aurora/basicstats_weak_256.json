@@ -1,0 +1,40 @@
+{
+    "PARAMETERS_SETS": {
+        "implementations": {
+            "algorithm": [
+                { "library": "sklearnex", "device": "distributed", "num_procs": [1,2,6,12,24,48,192,768,3072], "procs_per_node": 12 }
+            ]
+        },
+        "basicstats parameters": {
+            "algorithm": {
+                "estimator": "BasicStatistics",
+                "estimator_methods": { "inference": "compute" }
+            },
+			"data": {
+				"dtype": ["float64"],
+				"split_kwargs": { "test_size": 0.999 },
+				"weak_scaling": 1
+			}
+        },
+        "real datasets": {
+            "data": [
+                { "dataset": "susy", "dataset_kwargs": { "train_file": "susy_train.csv" } },
+		{ "dataset": "higgs", "dataset_kwargs": { "train_file": "higgs_10500t_train.csv" } }
+            ]
+        },
+        "synthetic data": {
+            "data": [
+                { "source": "make_blobs", "generation_kwargs": { "n_samples": 10000, "n_features": 10000, "centers": 1 } },
+                { "source": "make_blobs", "generation_kwargs": { "n_samples": 10000000, "n_features": 10, "centers": 1 } }
+            ]
+        }
+    },
+    "TEMPLATES": {
+        "Moments Synthetic Data": {
+            "INCLUDE": ["implementations", "basicstats parameters", "synthetic data"]
+        },
+        "Moments Real Datasets": {
+            "INCLUDE": ["implementations", "basicstats parameters", "real datasets"]
+        }
+    }
+}

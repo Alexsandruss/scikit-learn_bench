@@ -1,0 +1,39 @@
+{
+    "PARAMETERS_SETS": {
+        "implementations": {
+            "algorithm": [
+                { "library": "sklearnex", "device": "distributed", "num_procs": [1,2,6,12,24,48,192,768,3072], "procs_per_node": 12 }
+            ]
+        },
+        "covariance parameters": {
+            "algorithm": {
+                "estimator": "EmpiricalCovariance"
+            },
+			"data": {
+				"dtype": ["float64"],
+				"weak_scaling": 1
+			}
+        },
+        "real datasets": {
+            "data": [
+                { "dataset": "epsilon", "dataset_kwargs": { "train_file": "epsilon_80k_train.csv" } },
+                { "dataset": "gist",    "dataset_kwargs": { "train_file": "gist_500k.csv" } },
+                { "dataset": "cifar",   "dataset_kwargs": { "train_file": "cifar_50k_train_binary.csv" } }
+            ]
+        },
+        "synthetic data": {
+            "data": [
+                { "source": "make_blobs", "generation_kwargs": { "n_samples": 100000, "n_features": 1000, "centers": 1 } },
+                { "source": "make_blobs", "generation_kwargs": { "n_samples": 20000000, "n_features": 10, "centers": 1 } }
+            ]
+        }
+    },
+    "TEMPLATES": {
+        "Covariance Real Datasets": {
+            "INCLUDE": ["implementations", "covariance parameters", "real datasets"]
+        },
+        "Covariance Synthetic Data": {
+            "INCLUDE": ["implementations", "covariance parameters", "synthetic data"]
+	}
+    }
+}
