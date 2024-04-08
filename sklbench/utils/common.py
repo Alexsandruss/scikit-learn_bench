@@ -201,5 +201,9 @@ def convert_to_ndarray(a):
         return a.asnumpy()
     elif "cupy.ndarray" in str(type(a)):
         return a.get()
+    elif "dpctl.tensor" in str(type(a)):
+        import dpctl
+
+        return dpctl.tensor.to_numpy(a)
     else:
         raise ValueError("Unable to convert data to numpy.ndarray")

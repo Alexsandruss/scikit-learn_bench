@@ -44,11 +44,11 @@ def convert_data(data, dformat: str, order: str, dtype: str):
     elif dformat == "dpnp":
         import dpnp
 
-        return dpnp.array(data)
+        return dpnp.array(data, order=order)
     elif dformat == "dpctl":
-        import dpnp
+        import dpctl
 
-        return dpnp.array(data)
+        return dpctl.tensor.asarray(data, order=order)
     elif dformat.startswith("modin"):
         if dformat.endswith("ray"):
             os.environ["MODIN_ENGINE"] = "ray"

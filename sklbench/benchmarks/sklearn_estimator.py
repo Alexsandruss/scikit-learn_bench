@@ -278,7 +278,7 @@ def get_context(bench_case: BenchCase):
         data_format = get_bench_case_value(
             bench_case, f"data:format", None
         )
-        if data_format == "dpnp":
+        if data_format == "dpnp" or data_format == "dpctl":
             from contextlib import nullcontext
 
             return nullcontext, dict()
