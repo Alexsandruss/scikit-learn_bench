@@ -1,0 +1,40 @@
+{
+    "PARAMETERS_SETS": {
+        "implementations": {
+            "algorithm": [
+                { "library": "sklearnex", "device": "distributed", "num_procs": [1,2,6,12,24,48,96,192,384,768,1536,3072], "procs_per_node": 12 }
+            ]
+        },
+        "logreg parameters": {
+			"algorithm": {
+				"estimator": "LogisticRegression",
+				"estimator_params": { "solver": "newton-cg" },
+                		"estimator_methods": { "training": "fit" }
+			},
+            "data": {
+                "dtype": ["float64"]
+            }
+		},
+        "real datasets": {
+            "data": [
+                { "dataset": "gist",    "dataset_kwargs": { "train_file": "gist_200k.csv",              "test_file": "gist_100k.csv",             "n_classes": 2 }, "algorithm": { "estimator_params": { "max_iter": 20 } } },
+                { "dataset": "susy",    "dataset_kwargs": { "train_file": "susy_train.csv",             "test_file": "susy_test.csv",             "n_classes": 2 }, "algorithm": { "estimator_params": { "max_iter": 20 } } },
+                { "dataset": "epsilon",    "dataset_kwargs": { "train_file": "epsilon_50k_train.csv",              "test_file": "epsilon_50k_train.csv",             "n_classes": 2 }, "algorithm": { "estimator_params": { "max_iter": 20 } } }
+            ]
+        },
+        "synthetic data": {
+            "data": [
+                { "source": "make_classification", "split_kwargs": { "train_size": 100000000, "test_size": 1000 },    "generation_kwargs": {  "n_samples": 100001000, "n_features": 10, "n_classes": 2 } },
+                { "source": "make_classification", "split_kwargs": { "train_size": 500000, "test_size": 1000 },    "generation_kwargs": {  "n_samples": 501000, "n_features": 10000, "n_classes": 2 } }
+            ]
+        }
+    },
+    "TEMPLATES": {
+        "LogReg Real Datasets": {
+            "INCLUDE": ["implementations", "logreg parameters", "real datasets"]
+        },
+        "LogReg Synthetic Data": {
+            "INCLUDE": ["implementations", "logreg parameters", "synthetic data"]
+        }
+    }
+}
