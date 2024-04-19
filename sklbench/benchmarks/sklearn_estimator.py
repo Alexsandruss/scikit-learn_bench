@@ -112,16 +112,21 @@ def get_number_of_classes(estimator_instance, y):
 
 
 def get_subset_metrics_of_estimator(
-    task, stage, estimator_instance, data
+    task, stage, estimator_instance, data, dformat
 ) -> Dict[str, float]:
     # brute kNN with transfer between training and inference stages
     # is required for recall metric calculation of search task
     global _brute_knn
 
     metrics = dict()
-    # Note: use data[0, 1] when calling estimator methods,
-    # x, y are numpy ndarrays for compatibility with sklearn metrics
-    x, y = list(map(convert_to_ndarray, data))
+    # Note: use data[0, 1] when calling estimator methods
+    if dformat == "dpnp" or dformat == "dpctl":
+        x = data[0]
+        y = convert_to_ndarray(data[1])
+    else:
+        # x, y are numpy ndarrays for compatibility with sklearn metrics
+        x, y = list(map(convert_to_ndarray, data))
+
     if stage == "training":
         if hasattr(estimator_instance, "n_iter_"):
             iterations = estimator_instance.n_iter_
@@ -454,12 +459,16 @@ def measure_sklearn_estimator(
                             f"{full_method_name} was not patched by sklearnex."
                         )
 
+    common_data_format = get_bench_case_value(bench_case, "data:format", "pandas")
+    dformat =  get_bench_case_value(
+        bench_case, f"data:format", common_data_format
+    )
     quality_metrics = {
         "training": get_subset_metrics_of_estimator(
-            task, "training", estimator_instance, (x_train, y_train)
+            task, "training", estimator_instance, (x_train, y_train), dformat
         ),
         "inference": get_subset_metrics_of_estimator(
-            task, "inference", estimator_instance, (x_test, y_test)
+            task, "inference", estimator_instance, (x_test, y_test), dformat
         ),
     }
     for method in metrics.keys():
