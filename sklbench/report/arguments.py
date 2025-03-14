@@ -53,6 +53,14 @@ def add_report_generator_arguments(
         help="[EXPERIMENTAL] Compatibility mode drops and modifies results "
         "to make them comparable (for example, sklearn and cuML parameters).",
     )
+    # included metrics arguments
+    parser.add_argument(
+        "--performance-stability-metrics",
+        "-psm",
+        default=False,
+        action="store_true",
+        help="Adds performance stability metrics in report.",
+    )
     # 'separate-table' report type arguments
     parser.add_argument(
         "--drop-columns",

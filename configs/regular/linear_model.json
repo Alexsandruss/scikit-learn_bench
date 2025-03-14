@@ -1,17 +1,25 @@
 {
-    "INCLUDE": ["../common/sklearn.json"],
+    "INCLUDE": ["../common/sklearn.json", "../common/linear_model.json"],
     "PARAMETERS_SETS": {
         "regression datasets": [
             {
                 "data": {
                     "source": "make_regression",
                     "split_kwargs": { "train_size": 0.2, "test_size": 0.8 },
-                    "generation_kwargs": {
-                        "n_samples": 500000,
-                        "n_features": [400, 2000],
-                        "n_informative": 5,
-                        "noise": 2.0
-                    }
+                    "generation_kwargs": [
+                        {
+                            "n_samples": 5000000, "n_features": 50,
+                            "n_informative": 5, "noise": 20.0
+                        },
+                        {
+                            "n_samples": 500000, "n_features": 400,
+                            "n_informative": 5, "noise": 40.0
+                        },
+                        {
+                            "n_samples": 100000, "n_features": 2000,
+                            "n_informative": 5, "noise": 60.0
+                        }
+                    ]
                 }
             },
             {
@@ -24,63 +32,10 @@
             {
                 "data": {
                     "dataset": ["hepmass", "susy"],
-                    "split_kwargs": { "train_size": 1000000, "test_size": null }
+                    "split_kwargs": { "train_size": 2000000, "test_size": null }
                 }
             }
-        ],
-        "common linear parameters": {
-            "algorithm": {
-                "estimator": "LinearRegression",
-                "estimator_params": { "fit_intercept": true, "copy_X": true }
-            }
-        },
-        "common ridge parameters": {
-            "algorithm": {
-                "estimator": "Ridge",
-                "estimator_params": {
-                    "fit_intercept": true,
-                    "alpha": 2.0,
-                    "tol": 1e-4
-                }
-            }
-        },
-        "common lasso parameters": {
-            "algorithm": {
-                "estimator": "Lasso",
-                "estimator_params": {
-                    "fit_intercept": true,
-                    "max_iter": 1000,
-                    "selection": "cyclic",
-                    "alpha": 1e-3,
-                    "tol": 1e-4
-                }
-            }
-        },
-        "common elasticnet parameters": {
-            "algorithm": {
-                "estimator": "ElasticNet",
-                "estimator_params": {
-                    "fit_intercept": true,
-                    "max_iter": 1000,
-                    "selection": "cyclic",
-                    "alpha": 1e-3,
-                    "l1_ratio": 0.9,
-                    "tol": 1e-4
-                }
-            }
-        },
-        "sklearn linear parameters": {
-            "estimator_params": { "n_jobs": "[SPECIAL_VALUE]physical_cpus" }
-        },
-        "sklearn ridge parameters": {
-            "estimator_params": { "solver": "auto" }
-        },
-        "cuml L2 parameters": {
-            "estimator_params": { "solver": "eig" }
-        },
-        "cuml L1 parameters": {
-            "estimator_params": { "solver": "cd" }
-        }
+        ]
     },
     "TEMPLATES": {
         "sklearn linear": {
