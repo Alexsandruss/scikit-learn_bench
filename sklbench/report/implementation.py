@@ -34,6 +34,7 @@ METRICS = {
     "lower is better": [
         "1st run time[ms]",
         "time[ms]",
+        "cost[microdollar]",
         "iterations",
         # classification
         "logloss",
@@ -106,7 +107,7 @@ COLUMNS_ORDER = [
     "batch_size",
 ]
 
-RED_COLOR, YELLOW_COLOR, GREEN_COLOR = "F85D5E", "FAF52E", "58C144"
+RED_COLOR, YELLOW_COLOR, GREEN_COLOR, WHITE_COLOR = "F85D5E", "FAF52E", "58C144", "FFFFFF"
 COLUMN_COLOR_RULES = {
     "time CV": ColorScaleRule(
         start_type="num",
@@ -299,7 +300,7 @@ def get_color_rule_for_comparison(scale):
         start_color=RED_COLOR,
         mid_type="num",
         mid_value=mid_value,
-        mid_color=YELLOW_COLOR,
+        mid_color=WHITE_COLOR,
         end_type="num",
         end_value=end_value,
         end_color=GREEN_COLOR,

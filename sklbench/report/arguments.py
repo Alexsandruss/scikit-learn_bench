@@ -98,14 +98,14 @@ def add_report_generator_arguments(
         "--perf-color-scale",
         type=float,
         nargs="+",
-        default=[0.8, 1.0, 10.0],
+        default=[0.5, 1.0, 2.0],
         help="Color scale for performance metric improvement in report.",
     )
     parser.add_argument(
         "--quality-color-scale",
         type=float,
         nargs="+",
-        default=[0.99, 0.995, 1.01],
+        default=[0.98, 1.0, 1.02],
         help="Color scale for quality metric improvement in report.",
     )
     return parser

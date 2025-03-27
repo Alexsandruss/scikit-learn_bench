@@ -80,6 +80,9 @@ def enrich_metrics(bench_result: BenchResult, include_performance_stability_metr
             "time CV": std / mean, # Coefficient of Variation
         }
     )
+    cost = res.get("cost[microdollar]", None)
+    if cost:
+        res["cost[microdollar]"] = box_filter(res["cost[microdollar]"])[0]
     batch_size = res.get("batch_size", None)
     if batch_size:
         res["throughput[samples/ms]"] = (
@@ -163,6 +166,7 @@ def measure_perf(
     enable_garbage_collection: bool,
     enable_cpu_profiling: bool,
     collect_return_values: bool = False,
+    cost_per_hour: float = 0.0,
     **kwargs,
 ):
     if enable_itt and not itt_is_available:
@@ -239,6 +243,11 @@ def measure_perf(
             )
     if enable_cpu_profiling:
         perf_metrics["cpu load[%]"] = cpu_loads
+    if cost_per_hour > 0.0:
+        perf_metrics["cost[microdollar]"] = list(map(
+            lambda x: x / 1000 / 3600 * cost_per_hour * 1e6,
+            perf_metrics["time[ms]"]
+        ))
     if collect_return_values:
         return perf_metrics, func_return_values
     else:
@@ -266,4 +275,5 @@ def measure_case(case: BenchCase, func, *args, **kwargs):
         enable_cache_flushing=get_bench_case_value(case, "bench:flush_cache", False),
         enable_garbage_collection=get_bench_case_value(case, "bench:gc_collect", False),
         enable_cpu_profiling=get_bench_case_value(case, "bench:cpu_profile", False),
+        cost_per_hour=get_bench_case_value(case, "bench:cost_per_hour", 0.0),
     )
