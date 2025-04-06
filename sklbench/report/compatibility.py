@@ -165,6 +165,7 @@ def transform_results_to_compatible(results: pd.DataFrame):
             if linear_index.any():
                 results.loc[linear_index, "algorithm"] = np.nan
                 results.loc[linear_index, "solver"] = np.nan
+                results.loc[linear_index, "iterations"] = np.nan
 
             sklearn_ridge_index = (results["estimator"] == "Ridge") & (
                 (results["library"] == "sklearn") | (results["library"] == "sklearnex")
@@ -176,6 +177,8 @@ def transform_results_to_compatible(results: pd.DataFrame):
                 results["library"] == "cuml"
             )
             if cuml_logreg_index.any():
+                logreg_index = (results["estimator"] == "LogisticRegression")
+                results.loc[logreg_index, "iterations"] = np.nan
                 lbfgs_solver_index = (
                     cuml_logreg_index
                     & (results["solver"] == "qn")

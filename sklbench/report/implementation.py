@@ -20,6 +20,7 @@ from typing import Dict, List
 
 import openpyxl as xl
 import pandas as pd
+import numpy as np
 from openpyxl.formatting.rule import ColorScaleRule
 from openpyxl.utils import get_column_letter
 from openpyxl.utils.dataframe import dataframe_to_rows
@@ -82,7 +83,7 @@ for memory_type in MEMORY_TYPES:
     METRICS["incomparable"].append(f"peak {memory_type} usage[MB]")
     METRICS["incomparable"].append(f"{memory_type} usage-iteration correlation")
 METRIC_NAMES = flatten_list([list(METRICS[key]) for key in METRICS])
-PERF_METRICS = ["time[ms]", "throughput[samples/ms]"]
+PERF_METRICS = ["time[ms]", "throughput[samples/ms]", "cost[microdollar]"]
 
 COLUMNS_ORDER = [
     # algorithm
@@ -190,6 +191,10 @@ def compare_df(input_df, diff_columns, diffs_selection, compared_columns=METRIC_
     df = input_df.set_index(index_columns)
     unique_indices = df.index.unique()
     splitted_dfs = split_df_by_columns(input_df, diff_columns)
+    for key, df in splitted_dfs.items():
+        for index_column in index_columns:
+            if index_column not in df.columns:
+                df[index_column] = np.nan
     splitted_dfs = {key: df.set_index(index_columns) for key, df in splitted_dfs.items()}
 
     # drop results with duplicated indices (keep first entry only)
@@ -209,9 +214,8 @@ def compare_df(input_df, diff_columns, diffs_selection, compared_columns=METRIC_
             if select_comparison(i, j, diffs_selection):
                 comparison_name = f"{key_jth} vs {key_ith}"
                 for column in df_ith.columns:
-                    # logger.warning(f"Comparing {key_jth} vs {key_ith} for {column}")
-                    # logger.warning(df_jth[column])
-                    # logger.warning(df_ith[column])
+                    if column not in df_jth.columns:
+                        continue
                     if column in METRICS["higher is better"]:
                         df[f"{comparison_name}\n{column} relative improvement"] = (
                             df_jth[column] / df_ith[column]
@@ -317,7 +321,7 @@ def apply_rules_for_sheet(sheet, perf_color_scale, quality_color_scale):
                 for cell in column
             ]
         )
-        is_time = any(
+        is_perf = any(
             [
                 isinstance(cell.value, str)
                 and (any(map(lambda x: x in cell.value, PERF_METRICS)))
@@ -327,7 +331,7 @@ def apply_rules_for_sheet(sheet, perf_color_scale, quality_color_scale):
         if is_rel_impr:
             sheet.conditional_formatting.add(
                 cell_range,
-                get_color_rule_for_comparison(perf_color_scale if is_time else quality_color_scale),
+                get_color_rule_for_comparison(perf_color_scale if is_perf else quality_color_scale),
             )
         else:
             column_name = {cell.value for cell in column} & set(COLUMN_COLOR_RULES.keys())

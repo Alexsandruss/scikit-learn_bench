@@ -129,7 +129,7 @@ def run_benchmarks(args: argparse.Namespace) -> int:
     # generate report
     if args.report:
         if args.result_file not in args.result_files:
-            args.result_files += [args.result_file]
+            args.result_files.append(args.result_file)
         generate_report(args)
 
     return return_code
