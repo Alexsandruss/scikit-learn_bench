@@ -42,7 +42,7 @@
         ],
         "high-load svr datasets": [
             {
-                "data": { "dataset": "year_prediction_msd", "split_kwargs": { "train_size": 100000, "test_size": null } },
+                "data": { "dataset": "year_prediction_msd", "split_kwargs": { "train_size": 50000, "test_size": null } },
                 "algorithm": { "estimator_params": { "C": 1.0, "kernel": "rbf" } }
             },
             {
@@ -78,7 +78,7 @@
         ],
         "high-load nusvr datasets": [
             {
-                "data": { "dataset": "year_prediction_msd", "split_kwargs": { "ignore": true } },
+                "data": { "dataset": "year_prediction_msd", "split_kwargs": { "train_size": 50000, "test_size": null } },
                 "algorithm": { "estimator_params": { "C": 1.0, "kernel": "rbf" } }
             },
             {
@@ -93,7 +93,7 @@
                 "data": {
                     "source": "make_regression",
                     "generation_kwargs": {
-                        "n_samples": 200000,
+                        "n_samples": 100000,
                         "n_features": 1000,
                         "n_informative": "[SPECIAL_VALUE]0.5"
                     },

@@ -6,17 +6,16 @@
                 "data": [
                     {
                         "dataset": "covtype",
-                        "split_kwargs": { "ignore": true }
+                        "split_kwargs": { "ignore": true },
+                        "preprocessing_kwargs": { "normalize": true }
                     },
                     {
                         "dataset": ["mnist", "gisette"],
-                        "split_kwargs": { "ignore": true },
-                        "preprocessing_kwargs": { "normalize": false }
+                        "split_kwargs": { "ignore": true }
                     },
                     {
                         "dataset": "cifar",
-                        "split_kwargs": { "train_size": 10000, "test_size": null },
-                        "preprocessing_kwargs": { "normalize": false }
+                        "split_kwargs": { "train_size": 10000, "test_size": null }
                     }
                 ]
             },
@@ -28,7 +27,8 @@
                         "test_size": null,
                         "shuffle": true,
                         "random_state": 42
-                    }
+                    },
+                    "preprocessing_kwargs": { "normalize": true }
                 },
                 "algorithm": {
                     "estimator_params": { "n_clusters": [2, 50] }
@@ -42,8 +42,7 @@
                         { "centers": 20, "cluster_std": 8.0, "n_samples": 2000000, "n_features": 100 },
                         { "centers": 20, "cluster_std": 24.0, "n_samples": 500000, "n_features": 400 }
                     ],
-                    "split_kwargs": { "train_size": 0.2, "test_size": null },
-                    "preprocessing_kwargs": { "normalize": false }
+                    "split_kwargs": { "train_size": 0.2, "test_size": null }
                 }
             }
             

@@ -8,9 +8,6 @@
                     "min_samples": 5,
                     "metric": "euclidean"
                 }
-            },
-            "data": {
-                "dtype": ["float32", "float64"]
             }
         },
         "sklearn dbscan parameters": {

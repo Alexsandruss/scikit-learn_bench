@@ -36,7 +36,7 @@
                 }
             },
             { "data": { "dataset": "mnist", "split_kwargs": { "train_size": 10000, "test_size": null } } },
-            { "data": { "dataset": "susy", "split_kwargs": { "train_size": 0.1, "test_size": null } } },
+            { "data": { "dataset": ["susy", "hepmass"], "split_kwargs": { "train_size": 0.1, "test_size": null } } },
             { "data": { "dataset": "cifar", "split_kwargs": { "train_size": 0.1, "test_size": null } } },
             { "data": { "dataset": "gisette", "split_kwargs": { "train_size": 2000, "test_size": null } } }
         ]

@@ -11,10 +11,6 @@
                     "random_state": 42
                 },
                 "estimator_methods": { "inference": "predict" }
-            },
-            "data": {
-                "dtype": ["float32", "float64"],
-                "preprocessing_kwargs": { "normalize": true }
             }
         },
         "sklearn kmeans parameters": {
