@@ -18,9 +18,9 @@ import argparse
 import json
 from typing import Dict, List
 
+import numpy as np
 import openpyxl as xl
 import pandas as pd
-import numpy as np
 from openpyxl.formatting.rule import ColorScaleRule
 from openpyxl.utils import get_column_letter
 from openpyxl.utils.dataframe import dataframe_to_rows
@@ -270,7 +270,10 @@ def get_result_tables_as_df(
     include_performance_stability_metrics=False,
 ):
     bench_cases = pd.DataFrame(
-        [enrich_metrics(bench_case, include_performance_stability_metrics) for bench_case in results["bench_cases"]]
+        [
+            enrich_metrics(bench_case, include_performance_stability_metrics)
+            for bench_case in results["bench_cases"]
+        ]
     )
 
     if compatibility_mode:
@@ -331,13 +334,17 @@ def apply_rules_for_sheet(sheet, perf_color_scale, quality_color_scale):
         if is_rel_impr:
             sheet.conditional_formatting.add(
                 cell_range,
-                get_color_rule_for_comparison(perf_color_scale if is_perf else quality_color_scale),
+                get_color_rule_for_comparison(
+                    perf_color_scale if is_perf else quality_color_scale
+                ),
             )
         else:
             column_name = {cell.value for cell in column} & set(COLUMN_COLOR_RULES.keys())
             if len(column_name) == 1:
                 column_name = column_name.pop()
-                sheet.conditional_formatting.add(cell_range, COLUMN_COLOR_RULES[column_name])
+                sheet.conditional_formatting.add(
+                    cell_range, COLUMN_COLOR_RULES[column_name]
+                )
 
 
 def write_environment_info(results, workbook):
@@ -369,7 +376,13 @@ def generate_report(args: argparse.Namespace):
     results = merge_result_files(args.result_files)
 
     diffby, splitby = args.diff_columns, args.split_columns
-    dfs = get_result_tables_as_df(results, diffby, splitby, args.compatibility_mode, args.performance_stability_metrics)
+    dfs = get_result_tables_as_df(
+        results,
+        diffby,
+        splitby,
+        args.compatibility_mode,
+        args.performance_stability_metrics,
+    )
 
     wb = xl.Workbook()
     summary_dfs = list()

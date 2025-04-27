@@ -425,9 +425,18 @@ def measure_sklearn_estimator(
                 if enable_modelbuilders and stage == "inference":
                     import daal4py
 
-                    daal_model = daal4py.mb.convert_model(
-                        estimator_instance.get_booster()
-                    )
+                    if hasattr(estimator_instance, "get_booster"):
+                        # XGBoost branch
+                        daal_model = daal4py.mb.convert_model(
+                            estimator_instance.get_booster()
+                        )
+                    elif hasattr(estimator_instance, "booster_"):
+                        # LightGBM branch
+                        daal_model = daal4py.mb.convert_model(estimator_instance.booster_)
+                    else:
+                        raise ValueError(
+                            "Unable to get convert model to daal4py GBT format."
+                        )
                     method_instance = getattr(daal_model, method)
 
                 metrics[method] = measure_case(bench_case, method_instance, *data_args)

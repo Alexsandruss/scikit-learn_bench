@@ -17,6 +17,7 @@
 import gc
 import threading
 import timeit
+import warnings
 from math import ceil, sqrt
 from time import sleep
 from typing import Dict, List
@@ -24,16 +25,12 @@ from typing import Dict, List
 import numpy as np
 import psutil
 from cpuinfo import get_cpu_info
-
-import warnings
-
 from scipy.stats import pearsonr
 
 from .bench_case import get_bench_case_value
 from .custom_types import BenchCase, BenchResult
 from .env import get_number_of_sockets
 from .logger import logger
-
 
 try:
     import itt
@@ -62,7 +59,9 @@ def box_filter(array, left=0.2, right=0.8):
     return np.mean(result), np.std(result)
 
 
-def enrich_metrics(bench_result: BenchResult, include_performance_stability_metrics=False):
+def enrich_metrics(
+    bench_result: BenchResult, include_performance_stability_metrics=False
+):
     """Transforms raw performance and other results into aggregated metrics"""
     # time metrics
     res = bench_result.copy()
@@ -77,7 +76,7 @@ def enrich_metrics(bench_result: BenchResult, include_performance_stability_metr
     res.update(
         {
             "time[ms]": mean,
-            "time CV": std / mean, # Coefficient of Variation
+            "time CV": std / mean,  # Coefficient of Variation
         }
     )
     cost = res.get("cost[microdollar]", None)
@@ -100,7 +99,7 @@ def enrich_metrics(bench_result: BenchResult, include_performance_stability_metr
                     )
                     mem_iter_corr, _ = pearsonr(
                         res[f"peak {memory_type} usage[MB]"],
-                        list(range(len(res[f"peak {memory_type} usage[MB]"])))
+                        list(range(len(res[f"peak {memory_type} usage[MB]"]))),
                     )
                 res[f"{memory_type} usage-iteration correlation"] = mem_iter_corr
             res[f"peak {memory_type} usage[MB]"] = max(
@@ -244,10 +243,9 @@ def measure_perf(
     if enable_cpu_profiling:
         perf_metrics["cpu load[%]"] = cpu_loads
     if cost_per_hour > 0.0:
-        perf_metrics["cost[microdollar]"] = list(map(
-            lambda x: x / 1000 / 3600 * cost_per_hour * 1e6,
-            perf_metrics["time[ms]"]
-        ))
+        perf_metrics["cost[microdollar]"] = list(
+            map(lambda x: x / 1000 / 3600 * cost_per_hour * 1e6, perf_metrics["time[ms]"])
+        )
     if collect_return_values:
         return perf_metrics, func_return_values
     else:

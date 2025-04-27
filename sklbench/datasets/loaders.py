@@ -25,10 +25,10 @@ from sklearn.datasets import (
     load_digits,
     load_svmlight_file,
     make_blobs,
-    make_classification,
-    make_regression,
-    make_moons,
     make_circles,
+    make_classification,
+    make_moons,
+    make_regression,
 )
 
 from .common import cache, load_data_description, load_data_from_cache, preprocess

@@ -46,12 +46,12 @@ def transform_results_to_compatible(results: pd.DataFrame):
         # auto-assigned `n_jobs` drop for different CPUs
         if results["n_jobs"].unique().size > 1:
             results.drop(
-            inplace=True,
-            errors="ignore",
-            columns=[
-                "n_jobs",
-            ],
-        )
+                inplace=True,
+                errors="ignore",
+                columns=[
+                    "n_jobs",
+                ],
+            )
     # cuML compatibility
     if (
         (results["library"] == "cuml")
@@ -177,7 +177,7 @@ def transform_results_to_compatible(results: pd.DataFrame):
                 results["library"] == "cuml"
             )
             if cuml_logreg_index.any():
-                logreg_index = (results["estimator"] == "LogisticRegression")
+                logreg_index = results["estimator"] == "LogisticRegression"
                 results.loc[logreg_index, "iterations"] = np.nan
                 lbfgs_solver_index = (
                     cuml_logreg_index
