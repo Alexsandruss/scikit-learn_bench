@@ -14,11 +14,12 @@ Configs are split into subdirectories and files by benchmark scope and algorithm
 
 | Scope (Folder) | Description    |
 |:---------------|:---------------|
-| `common` | Describes common parameters for other scopes |
-| `experiments` | Configs for specific performance-profiling experiments |
-| `regular` | Configs used to regularly track performance changes |
-| `spmd` | Configs used to track performance of SPMD algorithms |
-| `testing` | Configs used in testing of `scikit-learn_bench` |
+| `common` | Defines common parameters for other scopes |
+| `experiments` | Configurations for specific performance-profiling experiments |
+| `regular` | Configurations used to regularly track performance changes |
+| `weekly` | Configurations with high-load cases used to track performance changes at longer intervals |
+| `spmd` | Configurations used to track the performance of SPMD algorithms |
+| `testing` | Configurations used in testing `scikit-learn_bench` |
 
 # Benchmarking Config Specification
 

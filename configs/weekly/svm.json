@@ -1,13 +1,6 @@
 {
     "INCLUDE": ["../common/sklearn.json", "../common/svm.json"],
     "PARAMETERS_SETS": {
-        "larger cache_size": {
-            "algorithm": {
-                "estimator_params": {
-                    "cache_size": 65536
-                }
-            }
-        },
         "high-load svc binary datasets": [
             {
                 "data": { "dataset": "a9a", "split_kwargs": { "ignore": true }  },
@@ -110,7 +103,6 @@
                 "common svm parameters",
                 "svm clsf parameters",
                 "svc parameters",
-                "larger cache_size",
                 "high-load svc binary datasets"
             ]
         },
@@ -120,7 +112,6 @@
                 "common svm parameters",
                 "svm clsf parameters",
                 "svc parameters",
-                "larger cache_size",
                 "high-load svc multiclass datasets"
             ]
         },
@@ -129,7 +120,6 @@
                 "svr implementations",
                 "common svm parameters",
                 "svr parameters",
-                "larger cache_size",
                 "high-load svr datasets"
             ]
         },
@@ -139,7 +129,6 @@
                 "common svm parameters",
                 "svm clsf parameters",
                 "nusvc parameters",
-                "larger cache_size",
                 "high-load nusvc datasets"
             ]
         },
@@ -148,7 +137,6 @@
                 "nusvm implementations",
                 "common svm parameters", 
                 "nusvr parameters",
-                "larger cache_size",
                 "high-load nusvr datasets"
             ]
         }
